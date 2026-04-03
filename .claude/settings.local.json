@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx serve:*)",
+      "Bash(node index.js)",
+      "WebFetch(domain:levellein.capi-agglo.fr)",
+      "Bash(npm install:*)",
+      "Bash(ls c:/Users/Alexis/Desktop/agenda-isere/*.json c:/Users/Alexis/Desktop/agenda-isere/*.js)",
+      "Bash(git --version)"
+    ]
+  }
+}

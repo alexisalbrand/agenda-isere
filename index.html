@@ -1,0 +1,624 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Programmation — Scène Grenobloise</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f0f13;
+      --surface: #1a1a22;
+      --surface2: #22222e;
+      --accent: #e85d4a;
+      --accent2: #f7a072;
+      --text: #f0eff4;
+      --muted: #8b8a9b;
+      --border: #2e2e3d;
+      --radius: 12px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      min-height: 100vh;
+    }
+
+    /* HEADER */
+    header {
+      padding: 2.5rem 2rem 1.5rem;
+      text-align: center;
+      border-bottom: 1px solid var(--border);
+      background: linear-gradient(180deg, #1a0a08 0%, var(--bg) 100%);
+    }
+    header h1 {
+      font-size: clamp(1.6rem, 4vw, 2.8rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    header p {
+      color: var(--muted);
+      margin-top: 0.4rem;
+      font-size: 0.95rem;
+    }
+    #count { font-weight: 600; color: var(--accent2); }
+    #last-refresh { font-size: 0.8rem; color: var(--muted); margin-top: 0.3rem; }
+
+    #refresh-btn {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 0.4rem 1.1rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      height: 34px;
+      width: 180px;
+      justify-content: center;
+    }
+    #refresh-btn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent2); }
+    #refresh-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    #refresh-btn.loading .icon { display: inline-block; animation: spin 1s linear infinite; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    #progress-banner {
+      display: none;
+      margin: 1rem 2rem 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 0.75rem 1rem;
+    }
+    #progress-bar-track {
+      width: 100%;
+      height: 6px;
+      background: var(--surface2);
+      border-radius: 3px;
+      overflow: hidden;
+      margin-bottom: 0.6rem;
+    }
+    #progress-bar-fill {
+      height: 100%;
+      width: 35%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 3px;
+      animation: indeterminate 1.4s ease-in-out infinite;
+    }
+    @keyframes indeterminate {
+      0%   { transform: translateX(-100%); }
+      100% { transform: translateX(320%); }
+    }
+    #progress-log {
+      font-size: 0.75rem;
+      color: var(--muted);
+      max-height: 80px;
+      overflow-y: auto;
+      font-family: monospace;
+    }
+    #progress-log .line-warn { color: #f87171; }
+
+    #error-banner {
+      display: none;
+      margin: 1rem 2rem 0;
+      background: #2a1010;
+      border: 1px solid #7a2020;
+      border-radius: var(--radius);
+      padding: 0.75rem 1rem;
+      font-size: 0.8rem;
+      color: #f87171;
+    }
+    #error-banner summary { cursor: pointer; font-weight: 600; margin-bottom: 0.4rem; }
+    #error-banner pre { white-space: pre-wrap; word-break: break-word; margin-top: 0.5rem; color: #fca5a5; }
+
+    /* FILTRES */
+    #filters {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(15,15,19,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+    #filters-bar {
+      display: none;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.6rem 1rem;
+    }
+    #filters-title {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-weight: 600;
+      letter-spacing: 0.05em;
+    }
+    #menu-toggle {
+      display: none;
+      background: none;
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 8px;
+      padding: 0.4rem 0.75rem;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    #filters-inner {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      align-items: center;
+      justify-content: center;
+      padding: 0.75rem 2rem;
+    }
+    @media (max-width: 640px) {
+      #menu-toggle { display: block; }
+      #filters-bar { display: flex; }
+      #filters-inner {
+        flex-direction: column;
+        align-items: stretch;
+        padding: 0 1rem 1rem;
+        display: none;
+      }
+      #filters-inner.open { display: flex; }
+      #filters-inner select,
+      #filters-inner button { width: 100%; }
+    }
+#date-select,
+    #lieu-select {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 999px;
+      padding: 0.4rem 1rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+      outline: none;
+      height: 34px;
+      width: 180px;
+    }
+    #date-select:focus,
+    #lieu-select:focus { border-color: var(--accent); }
+
+    .toggle-btn {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 0.4rem 1rem;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.15s;
+      height: 34px;
+      width: 180px;
+    }
+    .toggle-btn:hover { border-color: var(--accent); color: var(--text); }
+    .toggle-btn.active { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+
+    .filter-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+    .filter-btn {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--muted);
+      border-radius: 999px;
+      padding: 0.35rem 0.9rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .filter-btn:hover { border-color: var(--accent); color: var(--text); }
+    .filter-btn.active {
+      background: var(--accent);
+      border-color: var(--accent);
+      color: #fff;
+      font-weight: 600;
+    }
+
+    /* MAIN */
+    main { padding: 2rem; max-width: 1600px; margin: 0 auto; }
+
+    /* GRILLE */
+    #grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1.25rem;
+    }
+
+    /* CARTE */
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 32px rgba(0,0,0,0.5);
+      border-color: var(--accent);
+    }
+    .card.hidden { display: none; }
+    .card.past { opacity: 0.45; }
+
+    .fav-btn {
+      position: absolute;
+      top: 0.5rem;
+      right: 0.5rem;
+      background: rgba(15,15,19,0.7);
+      border: none;
+      border-radius: 50%;
+      width: 30px;
+      height: 30px;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.15s;
+      z-index: 2;
+    }
+    @media (max-width: 640px) {
+      .fav-btn { width: 42px; height: 42px; font-size: 1.4rem; }
+    }
+    .fav-btn:hover { transform: scale(1.2); }
+    .fav-btn.active { filter: drop-shadow(0 0 4px #e85d4a); }
+
+    .card-img { position: relative; }
+
+    .card-img {
+      width: 100%;
+      aspect-ratio: 3 / 4;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .card-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+      transition: transform 0.3s;
+    }
+    .card:hover .card-img img { transform: scale(1.05); }
+
+    .card-body {
+      padding: 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.3rem;
+      flex: 1;
+    }
+    .card-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.3;
+      text-decoration: none;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .card-title:hover { color: var(--accent2); }
+    .card-date {
+      font-size: 0.78rem;
+      color: var(--accent2);
+      font-weight: 600;
+    }
+    .card-genre {
+      font-size: 0.75rem;
+      color: var(--muted);
+    }
+    .card-lieu {
+      font-size: 0.72rem;
+      color: var(--muted);
+      margin-top: auto;
+      padding-top: 0.3rem;
+      border-top: 1px solid var(--border);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* VIDE */
+    #empty {
+      display: none;
+      text-align: center;
+      color: var(--muted);
+      padding: 4rem;
+      font-size: 1rem;
+    }
+
+    /* SCROLLBAR */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Scènes Isèroises</h1>
+  <p><span id="count">…</span> spectacles · saison 2025–2026</p>
+  <p id="last-refresh">Dernier refresh : …</p>
+</header>
+
+<div id="progress-banner">
+  <div id="progress-bar-track"><div id="progress-bar-fill"></div></div>
+  <div id="progress-log"></div>
+</div>
+
+<details id="error-banner">
+  <summary>⚠ Des erreurs sont survenues lors du dernier refresh (<span id="error-count">0</span>)</summary>
+  <pre id="error-list"></pre>
+</details>
+
+<div id="filters">
+  <div id="filters-bar">
+    <span id="filters-title">Filtres</span>
+    <button id="menu-toggle" onclick="document.getElementById('filters-inner').classList.toggle('open')">☰</button>
+  </div>
+  <div id="filters-inner">
+    <button id="refresh-btn" onclick="triggerScrape()">
+      <span class="icon">↻</span> Rafraîchir
+    </button>
+    <select id="date-select">
+      <option value="">Tous les mois</option>
+    </select>
+    <select id="lieu-select">
+      <option value="">Tous les théâtres</option>
+    </select>
+    <button class="toggle-btn" id="fav-toggle" onclick="toggleFavFilter()">♥ Favoris</button>
+    <button class="toggle-btn" id="past-toggle" onclick="togglePast()">Afficher passés</button>
+  </div>
+</div>
+
+<main>
+  <div id="grid"></div>
+  <p id="empty">Aucun spectacle ne correspond à votre recherche.</p>
+</main>
+
+<script>
+async function updateLastRefresh() {
+  try {
+    const res = await fetch("/api/status");
+    const { lastRefresh } = await res.json();
+    const el = document.getElementById("last-refresh");
+    if (lastRefresh) {
+      const d = new Date(lastRefresh);
+      el.textContent = `Dernier refresh : ${d.toLocaleDateString("fr-FR")} à ${d.toLocaleTimeString("fr-FR")}`;
+    } else {
+      el.textContent = "Aucune donnée — cliquez sur Rafraîchir";
+    }
+  } catch {}
+}
+
+function showErrors(errors) {
+  const banner = document.getElementById("error-banner");
+  const filtered = errors.filter(Boolean);
+  if (filtered.length === 0) {
+    banner.style.display = "none";
+    return;
+  }
+  document.getElementById("error-count").textContent = filtered.length;
+  document.getElementById("error-list").textContent = filtered.join("\n");
+  banner.style.display = "block";
+}
+
+function triggerScrape() {
+  const btn = document.getElementById("refresh-btn");
+  const banner = document.getElementById("progress-banner");
+  const log = document.getElementById("progress-log");
+
+  btn.disabled = true;
+  btn.classList.add("loading");
+  banner.style.display = "block";
+  log.innerHTML = "";
+  document.getElementById("error-banner").style.display = "none";
+
+  const es = new EventSource("/api/scrape-stream");
+
+  es.onmessage = async (e) => {
+    const { type, message, errors } = JSON.parse(e.data);
+
+    if (type === "log" || type === "warn") {
+      const line = document.createElement("div");
+      if (type === "warn") line.className = "line-warn";
+      line.textContent = message;
+      log.appendChild(line);
+      log.scrollTop = log.scrollHeight;
+    }
+
+    if (type === "done") {
+      es.close();
+      banner.style.display = "none";
+      btn.disabled = false;
+      btn.classList.remove("loading");
+      showErrors(errors || []);
+      await loadEvents();
+      await updateLastRefresh();
+    }
+
+    if (type === "error") {
+      es.close();
+      banner.style.display = "none";
+      btn.disabled = false;
+      btn.classList.remove("loading");
+      showErrors([message]);
+    }
+  };
+
+  es.onerror = () => {
+    es.close();
+    banner.style.display = "none";
+    btn.disabled = false;
+    btn.classList.remove("loading");
+    showErrors(["Connexion au serveur perdue"]);
+  };
+}
+
+// --- Favoris ---
+const FAV_KEY = "agenda-favorites";
+let favorites = new Set(JSON.parse(localStorage.getItem(FAV_KEY) || "[]"));
+
+function saveFavorites() {
+  localStorage.setItem(FAV_KEY, JSON.stringify([...favorites]));
+}
+
+function toggleFav(id) {
+  if (favorites.has(id)) favorites.delete(id);
+  else favorites.add(id);
+  saveFavorites();
+  const btn = document.querySelector(`.fav-btn[data-id="${CSS.escape(id)}"]`);
+  if (btn) btn.classList.toggle("active", favorites.has(id));
+  btn.textContent = favorites.has(id) ? "♥" : "♡";
+  applyFilters();
+}
+
+// --- État filtres global ---
+let activeMonth = null;
+let activeLieu = null;
+let showFavOnly = false;
+let showPast = false;
+const TODAY = new Date().toISOString().slice(0, 10);
+
+function toggleFavFilter() {
+  showFavOnly = !showFavOnly;
+  document.getElementById("fav-toggle").classList.toggle("active", showFavOnly);
+  applyFilters();
+}
+
+function togglePast() {
+  showPast = !showPast;
+  document.getElementById("past-toggle").classList.toggle("active", showPast);
+  applyFilters();
+}
+
+function applyFilters() {
+  const grid = document.getElementById("grid");
+  let totalVisible = 0;
+
+  grid.querySelectorAll(".card").forEach(card => {
+    const isPast = card.dataset.date && card.dataset.date < TODAY;
+    const matchMonth = !activeMonth || (card.dataset.date || "").startsWith(activeMonth);
+    const matchLieu = !activeLieu || card.dataset.lieu === activeLieu;
+    const matchFav = !showFavOnly || favorites.has(card.dataset.id);
+    const matchPast = showPast || !isPast;
+    const match = matchMonth && matchLieu && matchFav && matchPast;
+    card.classList.toggle("hidden", !match);
+    if (match) totalVisible++;
+  });
+
+  document.getElementById("count").textContent = totalVisible;
+  document.getElementById("empty").style.display = totalVisible === 0 ? "block" : "none";
+}
+
+async function loadEvents() {
+  const res = await fetch("all-events.json");
+  const events = await res.json();
+
+  events.sort((a, b) => {
+    if (a.dateISO && b.dateISO) return a.dateISO.localeCompare(b.dateISO);
+    if (a.dateISO) return -1;
+    if (b.dateISO) return 1;
+    return a.title.localeCompare(b.title);
+  });
+
+  const grid = document.getElementById("grid");
+  grid.innerHTML = "";
+  for (const e of events) {
+    grid.appendChild(makeCard(e));
+  }
+  applyFilters();
+  return events;
+}
+
+async function init() {
+  await updateLastRefresh();
+
+  let events;
+  try {
+    events = await loadEvents();
+  } catch {
+    document.getElementById("count").textContent = "0";
+    document.getElementById("last-refresh").textContent = "Aucune donnée — cliquez sur Rafraîchir";
+    return;
+  }
+
+  // Filtre date par mois (select)
+  const MOIS = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"];
+  const monthsInData = [...new Set(
+    events.filter(e => e.dateISO).map(e => e.dateISO.slice(0, 7))
+  )].sort();
+
+  const dateSelect = document.getElementById("date-select");
+  dateSelect.innerHTML = '<option value="">Tous les mois</option>';
+  for (const ym of monthsInData) {
+    const [y, m] = ym.split("-");
+    const opt = document.createElement("option");
+    opt.value = ym;
+    opt.textContent = `${MOIS[parseInt(m) - 1]} ${y}`;
+    dateSelect.appendChild(opt);
+  }
+  dateSelect.addEventListener("change", () => { activeMonth = dateSelect.value || null; applyFilters(); });
+
+  // Filtre lieu (select)
+  const lieux = [...new Set(events.map(e => e.lieu).filter(Boolean))].sort();
+  const lieuSelect = document.getElementById("lieu-select");
+  lieuSelect.innerHTML = '<option value="">Tous les théâtres</option>';
+  for (const lieu of lieux) {
+    const opt = document.createElement("option");
+    opt.value = lieu;
+    opt.textContent = lieu;
+    lieuSelect.appendChild(opt);
+  }
+  lieuSelect.addEventListener("change", () => { activeLieu = lieuSelect.value || null; applyFilters(); });
+}
+
+function makeCard(e) {
+  const id = `${e.title}|${e.lieu}|${e.dateISO}`;
+  const isFav = favorites.has(id);
+  const isPast = e.dateISO && e.dateISO < TODAY;
+
+  const div = document.createElement("div");
+  div.className = "card" + (isPast ? " past" : "");
+  div.dataset.date = e.dateISO || "";
+  div.dataset.lieu = e.lieu || "";
+  div.dataset.id = id;
+
+  div.innerHTML = `
+    <div class="card-img">
+      <img src="${e.image}" alt="${e.title}" loading="lazy" onerror="this.src='https://placehold.co/600x800/1a1a22/444?text=…'">
+      <button class="fav-btn ${isFav ? "active" : ""}" data-id="${id.replace(/"/g, "&quot;")}" onclick="toggleFav(this.dataset.id)">${isFav ? "♥" : "♡"}</button>
+    </div>
+    <div class="card-body">
+      <a class="card-title" href="${e.link || '#'}" target="_blank">${e.title}</a>
+      ${e.date ? `<span class="card-date">${e.date}</span>` : ""}
+      ${e.genre ? `<span class="card-genre">${e.genre}</span>` : ""}
+      ${e.lieu ? `<span class="card-lieu">${e.lieu}</span>` : ""}
+    </div>
+  `;
+  return div;
+}
+
+init();
+</script>
+</body>
+</html>
