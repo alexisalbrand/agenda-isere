@@ -22,41 +22,27 @@ const PLACEHOLDER = "https://placehold.co/600x400/e2e8f0/94a3b8?text=Pas+d%27ima
 export async function main() {
   const launchOpts = {
     headless: true,
-    args: ["--no-sandbox", "--disable-setuid-sandbox"],
+    args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage"],
   };
-  const [b1, b2] = await Promise.all([
-    puppeteer.launch(launchOpts),
-    puppeteer.launch(launchOpts),
-  ]);
+  const browser = await puppeteer.launch(launchOpts);
 
-  const [
-    grandAngleEvents, mc2Events, velleinEvents, rampeEvents,
-    ilyadeEvents, ponsardEvents, agoraEvents, diapasonEvents,
-    theatreEnRondEvents, heureBleueEvents, faiencerieEvents,
-    manegeEvents, grenobleEvents, summumEvents
-  ] = await Promise.all([
-    scrapeGrandAngleAllPages(),
-    scrapemc2AllPages(),
-    scrapeVellein(b1),
-    scrapeRampe(),
-    scrapeIlyade(b2),
-    scrapePonsard(b2),
-    scrapeAgora(b1),
-    scrapeDiapason(b1),
-    scrapeTheatreEnRond(),
-    scrapeHeureBleue(),
-    scrapeFaiencerie(),
-    scrapeManege(),
-    scrapeGrenoble(),
-    scrapeSummum(),
-  ]);
+  const grandAngleEvents = await scrapeGrandAngleAllPages();
+  const mc2Events = await scrapemc2AllPages();
+  const velleinEvents = await scrapeVellein(browser);
+  const rampeEvents = await scrapeRampe();
+  const ilyadeEvents = await scrapeIlyade(browser);
+  const ponsardEvents = await scrapePonsard(browser);
+  const agoraEvents = await scrapeAgora(browser);
+  const diapasonEvents = await scrapeDiapason(browser);
+  const theatreEnRondEvents = await scrapeTheatreEnRond();
+  const heureBleueEvents = await scrapeHeureBleue();
+  const faiencerieEvents = await scrapeFaiencerie();
+  const manegeEvents = await scrapeManege();
+  const grenobleEvents = await scrapeGrenoble();
+  const summumEvents = await scrapeSummum();
+  const hexagoneEvents = await scrapeHexagone(browser);
 
-  await Promise.all([b1.close(), b2.close()]);
-
-  // Hexagone nécessite son propre navigateur (scroll infini lourd)
-  const b3 = await puppeteer.launch(launchOpts);
-  const hexagoneEvents = await scrapeHexagone(b3);
-  await b3.close();
+  await browser.close();
 
   const allEvents = [
     ...grandAngleEvents, ...mc2Events, ...velleinEvents, ...hexagoneEvents,
