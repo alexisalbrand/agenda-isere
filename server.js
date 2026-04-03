@@ -51,10 +51,14 @@ app.get("/api/scrape-stream/:theater", (req, res) => {
     });
   });
 
+  const ALL_KEYS = ["grandAngle","mc2","vellein","hexagone","rampe","ilyade","ponsard","agora","diapason","theatreEnRond","heureBleue","faiencerie","manege","grenoble","summum"];
+
   child.on("close", (code) => {
     scraping.delete(theater);
     const status = loadStatus();
-    status[theater] = new Date().toISOString();
+    const now = new Date().toISOString();
+    const keys = theater === "all" ? ALL_KEYS : [theater];
+    for (const k of keys) status[k] = now;
     saveStatus(status);
     send({ type: "done", code, errors, theater });
     res.end();
