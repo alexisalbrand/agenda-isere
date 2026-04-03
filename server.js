@@ -55,12 +55,19 @@ app.get("/api/scrape-stream/:theater", (req, res) => {
 
   child.on("close", (code) => {
     scraping.delete(theater);
-    const status = loadStatus();
     const now = new Date().toISOString();
-    const keys = theater === "all" ? ALL_KEYS : [theater];
-    for (const k of keys) status[k] = now;
-    saveStatus(status);
-    send({ type: "done", code, errors, theater });
+    let savedStatus = {};
+    try {
+      const status = loadStatus();
+      const keys = theater === "all" ? ALL_KEYS : [theater];
+      for (const k of keys) status[k] = now;
+      savedStatus = status;
+      saveStatus(status);
+      console.log("Status sauvegardé pour:", keys);
+    } catch (e) {
+      console.error("Erreur sauvegarde status:", e.message);
+    }
+    send({ type: "done", code, errors, theater, theaterStatus: savedStatus });
     res.end();
   });
 

@@ -589,7 +589,7 @@ function triggerScrape(key) {
   activeStreams[key] = es;
 
   es.onmessage = async (e) => {
-    const { type, message, errors } = JSON.parse(e.data);
+    const { type, message, errors, theaterStatus } = JSON.parse(e.data);
     if (type === "log" || type === "warn") {
       const line = document.createElement("div");
       if (type === "warn") line.className = "line-warn";
@@ -601,13 +601,7 @@ function triggerScrape(key) {
       es.close(); delete activeStreams[key];
       log.classList.remove("visible");
       showErrors(errors || []);
-      const now = new Date();
-      const dateStr = now.toLocaleDateString("fr-FR") + " " + now.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
-      const updatedKeys = key === "all" ? THEATERS.map(t => t.key) : [key];
-      for (const k of updatedKeys) {
-        const el = document.querySelector(`.theater-date[data-key="${k}"]`);
-        if (el) { el.textContent = dateStr; el.classList.remove("never"); }
-      }
+      if (theaterStatus) renderStatus(theaterStatus);
       await loadEvents();
       resetBtn(key, rowBtn, allBtn);
     }
@@ -633,25 +627,29 @@ function resetBtn(key, rowBtn, allBtn) {
 }
 
 // --- Modal ---
-function openModal() { document.getElementById("modal-overlay").classList.add("open"); }
+async function openModal() { document.getElementById("modal-overlay").classList.add("open"); await loadStatus(); }
 function closeModal() { document.getElementById("modal-overlay").classList.remove("open"); }
+
+function renderStatus(theaterStatus) {
+  THEATERS.forEach(({ key }) => {
+    const el = document.querySelector(`.theater-date[data-key="${key}"]`);
+    if (!el) return;
+    const iso = theaterStatus[key];
+    if (iso) {
+      const d = new Date(iso);
+      el.textContent = d.toLocaleDateString("fr-FR") + " " + d.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
+      el.classList.remove("never");
+    } else {
+      el.textContent = "jamais";
+      el.classList.add("never");
+    }
+  });
+}
 
 async function loadStatus() {
   try {
     const { theaterStatus } = await (await fetch("/api/status")).json();
-    THEATERS.forEach(({ key }) => {
-      const el = document.querySelector(`.theater-date[data-key="${key}"]`);
-      if (!el) return;
-      const iso = theaterStatus[key];
-      if (iso) {
-        const d = new Date(iso);
-        el.textContent = d.toLocaleDateString("fr-FR") + " " + d.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
-        el.classList.remove("never");
-      } else {
-        el.textContent = "jamais";
-        el.classList.add("never");
-      }
-    });
+    renderStatus(theaterStatus);
   } catch {}
 }
 
