@@ -350,6 +350,107 @@
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: var(--bg); }
     ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+    /* MODAL GESTION */
+    #modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 200;
+      align-items: center;
+      justify-content: center;
+    }
+    #modal-overlay.open { display: flex; }
+    #modal {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      width: min(560px, 95vw);
+      max-height: 85vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+    #modal-header {
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    #modal-header h2 { font-size: 1rem; font-weight: 700; }
+    #modal-close {
+      background: none;
+      border: none;
+      color: var(--muted);
+      font-size: 1.3rem;
+      cursor: pointer;
+      line-height: 1;
+    }
+    #modal-close:hover { color: var(--text); }
+    #theater-list {
+      overflow-y: auto;
+      flex: 1;
+      padding: 0.5rem 0;
+    }
+    .theater-row {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.6rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .theater-row:last-child { border-bottom: none; }
+    .theater-name { flex: 1; font-size: 0.9rem; font-weight: 600; }
+    .theater-date { font-size: 0.75rem; color: var(--muted); white-space: nowrap; }
+    .theater-date.never { color: #f87171; }
+    .refresh-one-btn {
+      background: var(--surface2);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-radius: 8px;
+      padding: 0.3rem 0.7rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .refresh-one-btn:hover:not(:disabled) { border-color: var(--accent); color: var(--accent2); }
+    .refresh-one-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    .refresh-one-btn.spinning { animation: spin 1s linear infinite; display: inline-block; }
+    #modal-footer {
+      padding: 0.75rem 1.25rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 0.75rem;
+      justify-content: flex-end;
+    }
+    #refresh-all-btn {
+      background: var(--accent);
+      border: none;
+      color: #fff;
+      border-radius: 999px;
+      padding: 0.4rem 1.1rem;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    #refresh-all-btn:hover:not(:disabled) { opacity: 0.85; }
+    #refresh-all-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+    #modal-log {
+      display: none;
+      font-size: 0.72rem;
+      color: var(--muted);
+      font-family: monospace;
+      max-height: 80px;
+      overflow-y: auto;
+      padding: 0.5rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+    }
+    #modal-log.visible { display: block; }
+    #modal-log .line-warn { color: #f87171; }
   </style>
 </head>
 <body>
@@ -357,16 +458,10 @@
 <header>
   <h1>Scènes Isèroises</h1>
   <p><span id="count">…</span> spectacles · saison 2025–2026</p>
-  <p id="last-refresh">Dernier refresh : …</p>
 </header>
 
-<div id="progress-banner">
-  <div id="progress-bar-track"><div id="progress-bar-fill"></div></div>
-  <div id="progress-log"></div>
-</div>
-
 <details id="error-banner">
-  <summary>⚠ Des erreurs sont survenues lors du dernier refresh (<span id="error-count">0</span>)</summary>
+  <summary>⚠ Des erreurs sont survenues (<span id="error-count">0</span>)</summary>
   <pre id="error-list"></pre>
 </details>
 
@@ -376,9 +471,7 @@
     <button id="menu-toggle" onclick="document.getElementById('filters-inner').classList.toggle('open')">☰</button>
   </div>
   <div id="filters-inner">
-    <button id="refresh-btn" onclick="triggerScrape()">
-      <span class="icon">↻</span> Rafraîchir
-    </button>
+    <button class="toggle-btn" style="background:var(--accent);border-color:var(--accent);color:#fff;" onclick="openModal()">⚙ Gérer les théâtres</button>
     <select id="date-select">
       <option value="">Tous les mois</option>
     </select>
@@ -390,54 +483,113 @@
   </div>
 </div>
 
+<!-- MODAL GESTION THÉÂTRES -->
+<div id="modal-overlay" onclick="if(event.target===this)closeModal()">
+  <div id="modal">
+    <div id="modal-header">
+      <h2>Gestion des théâtres</h2>
+      <button id="modal-close" onclick="closeModal()">✕</button>
+    </div>
+    <div id="modal-log"></div>
+    <div id="theater-list"></div>
+    <div id="modal-footer">
+      <button id="refresh-all-btn" onclick="triggerScrape('all')">↻ Tout rafraîchir</button>
+    </div>
+  </div>
+</div>
+
 <main>
   <div id="grid"></div>
   <p id="empty">Aucun spectacle ne correspond à votre recherche.</p>
 </main>
 
 <script>
-async function updateLastRefresh() {
-  try {
-    const res = await fetch("/api/status");
-    const { lastRefresh } = await res.json();
-    const el = document.getElementById("last-refresh");
-    if (lastRefresh) {
-      const d = new Date(lastRefresh);
-      el.textContent = `Dernier refresh : ${d.toLocaleDateString("fr-FR")} à ${d.toLocaleTimeString("fr-FR")}`;
-    } else {
-      el.textContent = "Aucune donnée — cliquez sur Rafraîchir";
-    }
-  } catch {}
+const THEATERS = [
+  { key: "grandAngle",    label: "Le Grand Angle" },
+  { key: "mc2",           label: "MC2 Grenoble" },
+  { key: "vellein",       label: "Le Vellein" },
+  { key: "hexagone",      label: "Hexagone" },
+  { key: "rampe",         label: "La Rampe" },
+  { key: "ilyade",        label: "L'ilyade" },
+  { key: "ponsard",       label: "Théâtre François Ponsard" },
+  { key: "agora",         label: "Agora Saint-Ismier" },
+  { key: "diapason",      label: "Diapason Saint-Marcellin" },
+  { key: "theatreEnRond", label: "Théâtre en Rond" },
+  { key: "heureBleue",    label: "L'Heure Bleue" },
+  { key: "faiencerie",    label: "La Faïencerie" },
+  { key: "manege",        label: "Manège de Vienne" },
+  { key: "grenoble",      label: "TMG" },
+  { key: "summum",        label: "Summum" },
+];
+
+// --- Favoris ---
+const FAV_KEY = "agenda-favorites";
+let favorites = new Set(JSON.parse(localStorage.getItem(FAV_KEY) || "[]"));
+function saveFavorites() { localStorage.setItem(FAV_KEY, JSON.stringify([...favorites])); }
+
+function toggleFav(id) {
+  if (favorites.has(id)) favorites.delete(id);
+  else favorites.add(id);
+  saveFavorites();
+  const btn = document.querySelector(`.fav-btn[data-id="${CSS.escape(id)}"]`);
+  if (btn) { btn.classList.toggle("active", favorites.has(id)); btn.textContent = favorites.has(id) ? "♥" : "♡"; }
+  applyFilters();
 }
 
+// --- Filtres ---
+let activeMonth = null, activeLieu = null, showFavOnly = false, showPast = false;
+const TODAY = new Date().toISOString().slice(0, 10);
+
+function toggleFavFilter() { showFavOnly = !showFavOnly; document.getElementById("fav-toggle").classList.toggle("active", showFavOnly); applyFilters(); }
+function togglePast() { showPast = !showPast; document.getElementById("past-toggle").classList.toggle("active", showPast); applyFilters(); }
+
+function applyFilters() {
+  let totalVisible = 0;
+  document.getElementById("grid").querySelectorAll(".card").forEach(card => {
+    const isPast = card.dataset.date && card.dataset.date < TODAY;
+    const match = (!activeMonth || (card.dataset.date || "").startsWith(activeMonth))
+      && (!activeLieu || card.dataset.lieu === activeLieu)
+      && (!showFavOnly || favorites.has(card.dataset.id))
+      && (showPast || !isPast);
+    card.classList.toggle("hidden", !match);
+    if (match) totalVisible++;
+  });
+  document.getElementById("count").textContent = totalVisible;
+  document.getElementById("empty").style.display = totalVisible === 0 ? "block" : "none";
+}
+
+// --- Erreurs ---
 function showErrors(errors) {
   const banner = document.getElementById("error-banner");
   const filtered = errors.filter(Boolean);
-  if (filtered.length === 0) {
-    banner.style.display = "none";
-    return;
-  }
+  if (!filtered.length) { banner.style.display = "none"; return; }
   document.getElementById("error-count").textContent = filtered.length;
   document.getElementById("error-list").textContent = filtered.join("\n");
   banner.style.display = "block";
 }
 
-function triggerScrape() {
-  const btn = document.getElementById("refresh-btn");
-  const banner = document.getElementById("progress-banner");
-  const log = document.getElementById("progress-log");
+// --- Scraping ---
+const activeStreams = {};
 
-  btn.disabled = true;
-  btn.classList.add("loading");
-  banner.style.display = "block";
-  log.innerHTML = "";
-  document.getElementById("error-banner").style.display = "none";
+function triggerScrape(key) {
+  if (activeStreams[key]) return;
 
-  const es = new EventSource("/api/scrape-stream");
+  const log = document.getElementById("modal-log");
+  const allBtn = document.getElementById("refresh-all-btn");
+  const rowBtn = key !== "all" ? document.querySelector(`.refresh-one-btn[data-key="${key}"]`) : null;
+
+  if (rowBtn) { rowBtn.disabled = true; rowBtn.textContent = "↻"; rowBtn.classList.add("spinning"); }
+  if (key === "all") { allBtn.disabled = true; document.querySelectorAll(".refresh-one-btn").forEach(b => b.disabled = true); }
+
+  log.innerHTML = "<div>Connexion en cours…</div>";
+  log.classList.add("visible");
+
+  const url = `/api/scrape-stream/${key}`;
+  const es = new EventSource(url);
+  activeStreams[key] = es;
 
   es.onmessage = async (e) => {
     const { type, message, errors } = JSON.parse(e.data);
-
     if (type === "log" || type === "warn") {
       const line = document.createElement("div");
       if (type === "warn") line.className = "line-warn";
@@ -445,164 +597,99 @@ function triggerScrape() {
       log.appendChild(line);
       log.scrollTop = log.scrollHeight;
     }
-
     if (type === "done") {
-      es.close();
-      banner.style.display = "none";
-      btn.disabled = false;
-      btn.classList.remove("loading");
+      es.close(); delete activeStreams[key];
+      log.classList.remove("visible");
       showErrors(errors || []);
+      await loadStatus();
       await loadEvents();
-      await updateLastRefresh();
+      resetBtn(key, rowBtn, allBtn);
     }
-
     if (type === "error") {
-      es.close();
-      banner.style.display = "none";
-      btn.disabled = false;
-      btn.classList.remove("loading");
+      es.close(); delete activeStreams[key];
+      log.classList.remove("visible");
       showErrors([message]);
+      resetBtn(key, rowBtn, allBtn);
     }
   };
 
   es.onerror = () => {
-    es.close();
-    banner.style.display = "none";
-    btn.disabled = false;
-    btn.classList.remove("loading");
+    es.close(); delete activeStreams[key];
+    log.classList.remove("visible");
     showErrors(["Connexion au serveur perdue"]);
+    resetBtn(key, rowBtn, allBtn);
   };
 }
 
-// --- Favoris ---
-const FAV_KEY = "agenda-favorites";
-let favorites = new Set(JSON.parse(localStorage.getItem(FAV_KEY) || "[]"));
-
-function saveFavorites() {
-  localStorage.setItem(FAV_KEY, JSON.stringify([...favorites]));
+function resetBtn(key, rowBtn, allBtn) {
+  if (rowBtn) { rowBtn.disabled = false; rowBtn.textContent = "↻"; rowBtn.classList.remove("spinning"); }
+  if (key === "all") { allBtn.disabled = false; document.querySelectorAll(".refresh-one-btn").forEach(b => b.disabled = false); }
 }
 
-function toggleFav(id) {
-  if (favorites.has(id)) favorites.delete(id);
-  else favorites.add(id);
-  saveFavorites();
-  const btn = document.querySelector(`.fav-btn[data-id="${CSS.escape(id)}"]`);
-  if (btn) btn.classList.toggle("active", favorites.has(id));
-  btn.textContent = favorites.has(id) ? "♥" : "♡";
-  applyFilters();
-}
+// --- Modal ---
+function openModal() { document.getElementById("modal-overlay").classList.add("open"); }
+function closeModal() { document.getElementById("modal-overlay").classList.remove("open"); }
 
-// --- État filtres global ---
-let activeMonth = null;
-let activeLieu = null;
-let showFavOnly = false;
-let showPast = false;
-const TODAY = new Date().toISOString().slice(0, 10);
-
-function toggleFavFilter() {
-  showFavOnly = !showFavOnly;
-  document.getElementById("fav-toggle").classList.toggle("active", showFavOnly);
-  applyFilters();
-}
-
-function togglePast() {
-  showPast = !showPast;
-  document.getElementById("past-toggle").classList.toggle("active", showPast);
-  applyFilters();
-}
-
-function applyFilters() {
-  const grid = document.getElementById("grid");
-  let totalVisible = 0;
-
-  grid.querySelectorAll(".card").forEach(card => {
-    const isPast = card.dataset.date && card.dataset.date < TODAY;
-    const matchMonth = !activeMonth || (card.dataset.date || "").startsWith(activeMonth);
-    const matchLieu = !activeLieu || card.dataset.lieu === activeLieu;
-    const matchFav = !showFavOnly || favorites.has(card.dataset.id);
-    const matchPast = showPast || !isPast;
-    const match = matchMonth && matchLieu && matchFav && matchPast;
-    card.classList.toggle("hidden", !match);
-    if (match) totalVisible++;
-  });
-
-  document.getElementById("count").textContent = totalVisible;
-  document.getElementById("empty").style.display = totalVisible === 0 ? "block" : "none";
-}
-
-async function loadEvents() {
-  const res = await fetch("all-events.json");
-  const events = await res.json();
-
-  events.sort((a, b) => {
-    if (a.dateISO && b.dateISO) return a.dateISO.localeCompare(b.dateISO);
-    if (a.dateISO) return -1;
-    if (b.dateISO) return 1;
-    return a.title.localeCompare(b.title);
-  });
-
-  const grid = document.getElementById("grid");
-  grid.innerHTML = "";
-  for (const e of events) {
-    grid.appendChild(makeCard(e));
-  }
-  applyFilters();
-  return events;
-}
-
-async function init() {
-  await updateLastRefresh();
-
-  let events;
+async function loadStatus() {
   try {
-    events = await loadEvents();
-  } catch {
-    document.getElementById("count").textContent = "0";
-    document.getElementById("last-refresh").textContent = "Aucune donnée — cliquez sur Rafraîchir";
-    return;
-  }
+    const { theaterStatus } = await (await fetch("/api/status")).json();
+    THEATERS.forEach(({ key }) => {
+      const el = document.querySelector(`.theater-date[data-key="${key}"]`);
+      if (!el) return;
+      const iso = theaterStatus[key];
+      if (iso) {
+        const d = new Date(iso);
+        el.textContent = d.toLocaleDateString("fr-FR") + " " + d.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
+        el.classList.remove("never");
+      } else {
+        el.textContent = "jamais";
+        el.classList.add("never");
+      }
+    });
+  } catch {}
+}
 
-  // Filtre date par mois (select)
-  const MOIS = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"];
-  const monthsInData = [...new Set(
-    events.filter(e => e.dateISO).map(e => e.dateISO.slice(0, 7))
-  )].sort();
-
-  const dateSelect = document.getElementById("date-select");
-  dateSelect.innerHTML = '<option value="">Tous les mois</option>';
-  for (const ym of monthsInData) {
-    const [y, m] = ym.split("-");
-    const opt = document.createElement("option");
-    opt.value = ym;
-    opt.textContent = `${MOIS[parseInt(m) - 1]} ${y}`;
-    dateSelect.appendChild(opt);
+function buildTheaterList() {
+  const list = document.getElementById("theater-list");
+  list.innerHTML = "";
+  for (const { key, label } of THEATERS) {
+    const row = document.createElement("div");
+    row.className = "theater-row";
+    row.innerHTML = `
+      <span class="theater-name">${label}</span>
+      <span class="theater-date never" data-key="${key}">jamais</span>
+      <button class="refresh-one-btn" data-key="${key}" onclick="triggerScrape('${key}')">↻</button>
+    `;
+    list.appendChild(row);
   }
-  dateSelect.addEventListener("change", () => { activeMonth = dateSelect.value || null; applyFilters(); });
+}
 
-  // Filtre lieu (select)
-  const lieux = [...new Set(events.map(e => e.lieu).filter(Boolean))].sort();
-  const lieuSelect = document.getElementById("lieu-select");
-  lieuSelect.innerHTML = '<option value="">Tous les théâtres</option>';
-  for (const lieu of lieux) {
-    const opt = document.createElement("option");
-    opt.value = lieu;
-    opt.textContent = lieu;
-    lieuSelect.appendChild(opt);
-  }
-  lieuSelect.addEventListener("change", () => { activeLieu = lieuSelect.value || null; applyFilters(); });
+// --- Événements ---
+async function loadEvents() {
+  try {
+    const res = await fetch("all-events.json");
+    const events = await res.json();
+    events.sort((a, b) => {
+      if (a.dateISO && b.dateISO) return a.dateISO.localeCompare(b.dateISO);
+      return a.dateISO ? -1 : b.dateISO ? 1 : a.title.localeCompare(b.title);
+    });
+    const grid = document.getElementById("grid");
+    grid.innerHTML = "";
+    for (const e of events) grid.appendChild(makeCard(e));
+    applyFilters();
+    return events;
+  } catch { return []; }
 }
 
 function makeCard(e) {
   const id = `${e.title}|${e.lieu}|${e.dateISO}`;
   const isFav = favorites.has(id);
   const isPast = e.dateISO && e.dateISO < TODAY;
-
   const div = document.createElement("div");
   div.className = "card" + (isPast ? " past" : "");
   div.dataset.date = e.dateISO || "";
   div.dataset.lieu = e.lieu || "";
   div.dataset.id = id;
-
   div.innerHTML = `
     <div class="card-img">
       <img src="${e.image}" alt="${e.title}" loading="lazy" onerror="this.src='https://placehold.co/600x800/1a1a22/444?text=…'">
@@ -616,6 +703,36 @@ function makeCard(e) {
     </div>
   `;
   return div;
+}
+
+async function init() {
+  buildTheaterList();
+  await loadStatus();
+  const events = await loadEvents();
+
+  if (!events.length) { document.getElementById("count").textContent = "0"; return; }
+
+  const MOIS = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"];
+  const monthsInData = [...new Set(events.filter(e => e.dateISO).map(e => e.dateISO.slice(0, 7)))].sort();
+  const dateSelect = document.getElementById("date-select");
+  dateSelect.innerHTML = '<option value="">Tous les mois</option>';
+  for (const ym of monthsInData) {
+    const [y, m] = ym.split("-");
+    const opt = document.createElement("option");
+    opt.value = ym; opt.textContent = `${MOIS[parseInt(m) - 1]} ${y}`;
+    dateSelect.appendChild(opt);
+  }
+  dateSelect.addEventListener("change", () => { activeMonth = dateSelect.value || null; applyFilters(); });
+
+  const lieux = [...new Set(events.map(e => e.lieu).filter(Boolean))].sort();
+  const lieuSelect = document.getElementById("lieu-select");
+  lieuSelect.innerHTML = '<option value="">Tous les théâtres</option>';
+  for (const lieu of lieux) {
+    const opt = document.createElement("option");
+    opt.value = lieu; opt.textContent = lieu;
+    lieuSelect.appendChild(opt);
+  }
+  lieuSelect.addEventListener("change", () => { activeLieu = lieuSelect.value || null; applyFilters(); });
 }
 
 init();

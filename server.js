@@ -7,34 +7,44 @@ import { fileURLToPath } from "url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const app = express();
 const PORT = process.env.PORT || 3000;
+const STATUS_FILE = path.join(__dirname, "theater-status.json");
 
 app.use(express.static(__dirname));
 
-let scraping = false;
+const scraping = new Set();
 
-app.get("/api/scrape-stream", (req, res) => {
+function loadStatus() {
+  try { return JSON.parse(fs.readFileSync(STATUS_FILE, "utf-8")); } catch { return {}; }
+}
+
+function saveStatus(status) {
+  fs.writeFileSync(STATUS_FILE, JSON.stringify(status, null, 2), "utf-8");
+}
+
+app.get("/api/scrape-stream/:theater", (req, res) => {
+  const theater = req.params.theater || "all";
+
   res.setHeader("Content-Type", "text/event-stream");
   res.setHeader("Cache-Control", "no-cache");
   res.setHeader("Connection", "keep-alive");
 
   const send = (obj) => res.write(`data: ${JSON.stringify(obj)}\n\n`);
 
-  if (scraping) {
+  if (scraping.has(theater)) {
     send({ type: "error", message: "Scraping déjà en cours" });
     return res.end();
   }
-  scraping = true;
+  scraping.add(theater);
 
-  const child = spawn("node", ["index.js"], { cwd: __dirname });
+  const args = theater === "all" ? ["index.js"] : ["index.js", theater];
+  const child = spawn("node", args, { cwd: __dirname });
   const errors = [];
 
   child.stdout.on("data", (d) => {
-    process.stdout.write(d);
     d.toString().split("\n").filter(Boolean).forEach(line => send({ type: "log", message: line }));
   });
 
   child.stderr.on("data", (d) => {
-    process.stderr.write(d);
     d.toString().split("\n").filter(Boolean).forEach(line => {
       errors.push(line);
       send({ type: "warn", message: line });
@@ -42,23 +52,20 @@ app.get("/api/scrape-stream", (req, res) => {
   });
 
   child.on("close", (code) => {
-    scraping = false;
-    send({ type: "done", code, errors });
+    scraping.delete(theater);
+    const status = loadStatus();
+    status[theater] = new Date().toISOString();
+    saveStatus(status);
+    send({ type: "done", code, errors, theater });
     res.end();
   });
 
-  req.on("close", () => { if (scraping) child.kill(); });
+  req.on("close", () => { child.kill(); scraping.delete(theater); });
 });
 
 app.get("/api/status", (req, res) => {
-  const jsonPath = path.join(__dirname, "all-events.json");
-  if (!fs.existsSync(jsonPath)) {
-    return res.json({ scraping, lastRefresh: null });
-  }
-  const { mtime } = fs.statSync(jsonPath);
-  res.json({ scraping, lastRefresh: mtime });
+  const status = loadStatus();
+  res.json({ scraping: [...scraping], theaterStatus: status });
 });
 
-app.listen(PORT, () => {
-  console.log(`Serveur démarré → http://localhost:${PORT}`);
-});
+app.listen(PORT, () => console.log(`Serveur démarré → http://localhost:${PORT}`));

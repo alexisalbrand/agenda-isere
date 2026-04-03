@@ -1,3 +1,5 @@
-import { main } from "./src/main.js";
+import { main, scrapeOne } from "./src/main.js";
 
-main().catch(console.error);
+const theater = process.argv[2];
+if (theater) scrapeOne(theater).catch(console.error);
+else main().catch(console.error);
