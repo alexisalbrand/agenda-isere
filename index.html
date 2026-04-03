@@ -601,7 +601,13 @@ function triggerScrape(key) {
       es.close(); delete activeStreams[key];
       log.classList.remove("visible");
       showErrors(errors || []);
-      await loadStatus();
+      const now = new Date();
+      const dateStr = now.toLocaleDateString("fr-FR") + " " + now.toLocaleTimeString("fr-FR", { hour: "2-digit", minute: "2-digit" });
+      const updatedKeys = key === "all" ? THEATERS.map(t => t.key) : [key];
+      for (const k of updatedKeys) {
+        const el = document.querySelector(`.theater-date[data-key="${k}"]`);
+        if (el) { el.textContent = dateStr; el.classList.remove("never"); }
+      }
       await loadEvents();
       resetBtn(key, rowBtn, allBtn);
     }
