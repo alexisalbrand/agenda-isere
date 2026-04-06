@@ -7,7 +7,10 @@
       "Bash(npm install:*)",
       "Bash(ls c:/Users/Alexis/Desktop/agenda-isere/*.json c:/Users/Alexis/Desktop/agenda-isere/*.js)",
       "Bash(git --version)",
-      "Bash(grep -h \"lieu\" c:/Users/Alexis/Desktop/agenda-isere/src/scrapers/*.js)"
+      "Bash(grep -h \"lieu\" c:/Users/Alexis/Desktop/agenda-isere/src/scrapers/*.js)",
+      "WebFetch(domain:www.ville-gieres.fr)",
+      "WebFetch(domain:lavencescene.saint-egreve.fr)",
+      "WebFetch(domain:www.theatre-hexagone.eu)"
     ]
   }
 }

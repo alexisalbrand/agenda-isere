@@ -1,3 +1,10 @@
+// ─── LA RAMPE (Échirolles) ───────────────────────────────────────────────────
+// Technique : axios + cheerio (page statique)
+// Tout est sur une seule page, pas de pagination.
+//
+// ⚠ Si l'URL change : modifier URL
+// ─────────────────────────────────────────────────────────────────────────────
+
 import axios from "axios";
 import * as cheerio from "cheerio";
 
@@ -11,11 +18,13 @@ export async function scrapeRampe() {
   const $ = cheerio.load(data);
   const events = [];
 
+  // Chaque spectacle est dans un div.item
   $("div.item").each((_, el) => {
     const title = $(el).find(".pos-content a h2").text().trim();
-    const link = $(el).find(".pos-content a").attr("href");
+    const link  = $(el).find(".pos-content a").attr("href");
     const image = $(el).find(".pos-media img").attr("src");
-    const date = $(el).find("li.date_first").text().trim();
+    const date  = $(el).find("li.date_first").text().trim();
+    // Plusieurs catégories possibles, on les joint avec une virgule
     const genre = $(el).find("li.categories a").map((_, a) => $(a).text().trim()).get().join(", ");
 
     if (title) events.push({ date, title, genre, link, image, lieu: "La Rampe" });

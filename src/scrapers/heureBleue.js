@@ -1,3 +1,12 @@
+// ─── L'HEURE BLEUE (Saint-Martin-d'Hères) ───────────────────────────────────
+// Technique : axios + cheerio (WordPress, page statique)
+// Les titres incluent le genre entre crochets : "[Théâtre] Mon spectacle"
+// On extrait et nettoie le titre et le genre séparément.
+// La date est dans un attribut data-start sur un élément .event_date.
+//
+// ⚠ Si l'URL change : modifier URL
+// ─────────────────────────────────────────────────────────────────────────────
+
 import axios from "axios";
 import * as cheerio from "cheerio";
 
@@ -13,13 +22,16 @@ export async function scrapeHeureBleue() {
 
   $("article").each((_, el) => {
     const rawTitle = $(el).find(".entry-title a").text().trim();
-    const link = $(el).find(".entry-title a").attr("href");
-    const image = $(el).find(".post-thumbnail img").attr("src");
-    const date = $(el).find(".event_date").attr("data-start") || "";
+    const link     = $(el).find(".entry-title a").attr("href");
+    const image    = $(el).find(".post-thumbnail img").attr("src");
+    // La date est dans un attribut data-start (format ISO)
+    const date     = $(el).find(".event_date").attr("data-start") || "";
 
+    // Extrait le genre entre crochets au début du titre : "[Genre] Titre > sous-titre"
     const genreMatch = rawTitle.match(/^\[([^\]]+)\]/);
-    const genre = genreMatch ? genreMatch[1] : "";
-    const title = rawTitle.replace(/^\[[^\]]+\]\s*/, "").replace(/\s*>.*$/, "").trim();
+    const genre  = genreMatch ? genreMatch[1] : "";
+    // Supprime le genre et le sous-titre éventuel après ">"
+    const title  = rawTitle.replace(/^\[[^\]]+\]\s*/, "").replace(/\s*>.*$/, "").trim();
 
     if (title) events.push({ date, title, genre, link, image, lieu: "L'Heure Bleue" });
   });

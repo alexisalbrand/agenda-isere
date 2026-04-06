@@ -1,3 +1,12 @@
+// ─── THÉÂTRE FRANÇOIS PONSARD (Vienne) ──────────────────────────────────────
+// Technique : Puppeteer + cheerio
+// Le site charge le contenu en JavaScript, d'où l'usage de Puppeteer.
+// Les spectacles sont dans une grille (.grille-saison-cellule).
+// Le genre est encodé dans les classes CSS de chaque cellule.
+//
+// ⚠ Si l'URL change : modifier URL
+// ─────────────────────────────────────────────────────────────────────────────
+
 import * as cheerio from "cheerio";
 
 const URL = "https://www.theatre-francois-ponsard.fr/saison/tous-publics";
@@ -11,13 +20,15 @@ export async function scrapePonsard(browser) {
 
   const $ = cheerio.load(html);
   const events = [];
+  // Classes à ignorer pour extraire le genre depuis les classes CSS
   const ignoredClasses = new Set(["grille-saison-cellule", "spectacle-passe", "spectacle-avenir"]);
 
   $(".grille-saison-cellule").each((_, el) => {
     const title = $(el).find("h5").text().trim();
-    const link = $(el).find("a").first().attr("href");
+    const link  = $(el).find("a").first().attr("href");
     const image = $(el).find("img").attr("src");
-    const date = $(el).find(".grille-saison-date").text().replace(/\s+/g, " ").trim();
+    const date  = $(el).find(".grille-saison-date").text().replace(/\s+/g, " ").trim();
+    // Les classes CSS de la cellule encodent le genre (ex: "theatre", "musique"...)
     const genre = ($(el).attr("class") || "").split(" ")
       .filter(c => !ignoredClasses.has(c) && !/^\d+$/.test(c))
       .join(", ");

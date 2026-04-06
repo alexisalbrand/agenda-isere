@@ -1,3 +1,18 @@
+// ─── ORCHESTRATEUR DU SCRAPING ───────────────────────────────────────────────
+// Ce fichier est le cœur du scraping. Il expose deux fonctions :
+//
+//   main()       → scrape TOUS les théâtres d'un coup (un seul navigateur)
+//   scrapeOne(key) → scrape UN SEUL théâtre et fusionne ses données dans
+//                    all-events.json sans écraser les autres théâtres
+//
+// La liste THEATERS centralise la configuration de chaque théâtre :
+//   key          → identifiant interne (utilisé dans les URLs et le stockage)
+//   label        → nom affiché dans l'interface
+//   lieu         → valeur du champ "lieu" sur chaque événement
+//   needsBrowser → true si le scraper nécessite Puppeteer
+//   scrape       → fonction à appeler (reçoit le browser si needsBrowser)
+// ─────────────────────────────────────────────────────────────────────────────
+
 import fs from "fs";
 import puppeteer from "puppeteer";
 import { toDateISO } from "./utils.js";
@@ -16,14 +31,20 @@ import { scrapeFaiencerie } from "./scrapers/faiencerie.js";
 import { scrapeManege } from "./scrapers/manege.js";
 import { scrapeGrenoble } from "./scrapers/grenoble.js";
 import { scrapeSummum } from "./scrapers/summum.js";
+import { scrapeLaussy } from "./scrapers/laussy.js";
+import { scrapeVenceScene } from "./scrapers/venceScene.js";
 
 const PLACEHOLDER = "https://placehold.co/600x400/e2e8f0/94a3b8?text=Pas+d%27image";
 
+// Options de lancement Puppeteer (communes à tous les scrapers)
+// --no-sandbox et --disable-setuid-sandbox sont requis sur Linux (Render)
+// --disable-dev-shm-usage évite les crashes mémoire
 const launchOpts = {
   headless: true,
   args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage"],
 };
 
+// Liste de tous les théâtres avec leur configuration
 export const THEATERS = [
   { key: "grandAngle",    label: "Le Grand Angle",            lieu: "Le Grand Angle",            scrape: ()  => scrapeGrandAngleAllPages() },
   { key: "mc2",           label: "MC2 Grenoble",              lieu: "MC2 Grenoble",              scrape: ()  => scrapemc2AllPages() },
@@ -40,23 +61,30 @@ export const THEATERS = [
   { key: "manege",        label: "Manège de Vienne",          lieu: "Manège de Vienne",          scrape: ()  => scrapeManege() },
   { key: "grenoble",      label: "TMG",                       lieu: "TMG",                       scrape: ()  => scrapeGrenoble() },
   { key: "summum",        label: "Summum",                    lieu: "Summum",                    scrape: ()  => scrapeSummum() },
+  { key: "laussy",        label: "Le Laussy",                 lieu: "Le Laussy",                 scrape: ()  => scrapeLaussy() },
+  { key: "venceScene",    label: "La Vence Scène",            lieu: "La Vence Scène",            scrape: ()  => scrapeVenceScene() },
 ];
 
+// Ajoute l'image placeholder et convertit la date en ISO pour chaque événement
 function normalize(events) {
   return events.map(e => ({ ...e, image: e.image || PLACEHOLDER, dateISO: toDateISO(e.date) }));
 }
 
+// Lit all-events.json, remplace les événements du théâtre concerné, réécrit le fichier
+// Permet de mettre à jour un seul théâtre sans écraser les autres
 function mergeIntoFile(newEvents, lieu) {
   let all = [];
   try { all = JSON.parse(fs.readFileSync("all-events.json", "utf-8")); } catch {}
-  const kept = all.filter(e => e.lieu !== lieu);
+  const kept = all.filter(e => e.lieu !== lieu); // on supprime les anciens événements de ce théâtre
   fs.writeFileSync("all-events.json", JSON.stringify([...kept, ...newEvents], null, 2), "utf-8");
 }
 
+// Scrape un seul théâtre par sa clé et fusionne dans all-events.json
 export async function scrapeOne(key) {
   const theater = THEATERS.find(t => t.key === key);
   if (!theater) throw new Error(`Théâtre inconnu : ${key}`);
 
+  // Lance Puppeteer seulement si le scraper en a besoin
   let browser;
   if (theater.needsBrowser) browser = await puppeteer.launch(launchOpts);
   try {
@@ -68,6 +96,8 @@ export async function scrapeOne(key) {
   }
 }
 
+// Scrape tous les théâtres séquentiellement (l'un après l'autre)
+// Un seul navigateur Puppeteer est partagé pour économiser la mémoire
 export async function main() {
   const browser = await puppeteer.launch(launchOpts);
   try {
@@ -78,9 +108,11 @@ export async function main() {
         allEvents.push(...events);
         console.log(`${theater.label} : ${events.length} événements`);
       } catch (err) {
+        // Si un théâtre plante, on continue avec les suivants
         console.error(`Erreur ${theater.label} : ${err.message}`);
       }
     }
+    // Écrase complètement all-events.json avec tous les événements
     fs.writeFileSync("all-events.json", JSON.stringify(allEvents, null, 2), "utf-8");
     console.log(`Total : ${allEvents.length} événements`);
   } finally {

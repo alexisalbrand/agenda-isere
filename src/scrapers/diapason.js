@@ -1,3 +1,13 @@
+// ─── DIAPASON (Saint-Marcellin) ──────────────────────────────────────────────
+// Technique : Puppeteer + cheerio
+// Le site charge le contenu en JavaScript.
+// L'image n'est pas dans une balise <img> mais dans le style CSS inline
+// d'un élément <figure> (background-image: url('...')).
+// Pas de genre disponible sur le listing.
+//
+// ⚠ Si l'URL change : modifier URL
+// ─────────────────────────────────────────────────────────────────────────────
+
 import * as cheerio from "cheerio";
 
 const URL = "https://www.diapason-saint-marcellin.fr";
@@ -14,9 +24,13 @@ export async function scrapeDiapason(browser) {
 
   $(".spectacles-item").each((_, el) => {
     const title = $(el).find(".spectacles-titre").text().trim();
-    const link = $(el).find(".spectacles-button").parent("a").attr("href");
+    const link  = $(el).find(".spectacles-button").parent("a").attr("href");
+
+    // L'image est dans le style CSS : style="background-image: url('...')"
     const style = $(el).find("figure.spectacles-image").attr("style") || "";
-    const image = style.match(/url\('([^']+)'\)/)?.[1];
+    const image = style.match(/url\('([^']+)'\)/)?.[1]; // extraction par regex
+
+    // Plusieurs dates possibles, on les rassemble
     const dateTexts = $(el).find(".spectacles-date-interne em").map((_, e) => $(e).text().trim()).get();
     const date = dateTexts.join(" ");
 
