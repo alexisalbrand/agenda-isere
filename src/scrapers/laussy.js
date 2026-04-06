@@ -50,6 +50,9 @@ export async function scrapeLaussy() {
     const nextUl = parent.next("ul").length ? parent.next("ul") : parent.nextAll("ul").first();
     const genre = nextUl.find("li").first().text().trim();
 
+    // Ignore les entrées sans date valide (ex: "Plaquette saison 2025-2026")
+    if (!date || !/\d/.test(date)) return;
+
     events.push({ title, date, genre, link: fullLink, image: "", lieu: "Le Laussy" });
   });
 
