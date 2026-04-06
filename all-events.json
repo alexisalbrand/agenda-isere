@@ -154,19 +154,19 @@
   },
   {
     "date": "Mai 5-6",
-    "title": "I'm fine",
-    "genre": "Théâtre",
-    "link": "https://www.mc2grenoble.fr/spectacle/im-fine/2026-05-05/",
-    "image": "https://www.mc2grenoble.fr/wp-content/uploads/2025/06/683db4b249ddb-photo-imfine-2-min-3-520x1000.jpeg",
+    "title": "Version(s)",
+    "genre": "Danse",
+    "link": "https://www.mc2grenoble.fr/spectacle/versions/2026-05-05/",
+    "image": "https://www.mc2grenoble.fr/wp-content/uploads/2025/06/683db55a1cc7c-photo-versions-lyon-maya-mihindou-10-520x1000.jpeg",
     "lieu": "MC2 Grenoble",
     "dateISO": "2026-05-05"
   },
   {
     "date": "Mai 5-6",
-    "title": "Version(s)",
-    "genre": "Danse",
-    "link": "https://www.mc2grenoble.fr/spectacle/versions/2026-05-05/",
-    "image": "https://www.mc2grenoble.fr/wp-content/uploads/2025/06/683db55a1cc7c-photo-versions-lyon-maya-mihindou-10-520x1000.jpeg",
+    "title": "I'm fine",
+    "genre": "Théâtre",
+    "link": "https://www.mc2grenoble.fr/spectacle/im-fine/2026-05-05/",
+    "image": "https://www.mc2grenoble.fr/wp-content/uploads/2025/06/683db4b249ddb-photo-imfine-2-min-3-520x1000.jpeg",
     "lieu": "MC2 Grenoble",
     "dateISO": "2026-05-05"
   },
@@ -565,6 +565,429 @@
     "image": "https://levellein.capi-agglo.fr/wp-content/uploads/2025/06/1-Avec-Toutes-Nos-Excuses-Visuel-©-Felix-Ledru-scaled-e1749825390393-768x570.jpg",
     "lieu": "Le Vellein",
     "dateISO": "2026-05-07"
+  },
+  {
+    "date": "12 SEP",
+    "title": "LANCEMENT DE SAISON FESTIF",
+    "genre": "THÉÂTRE, DANSE, MUSIQUE",
+    "link": "https://www.theatre-hexagone.eu/spectacle/lancement-de-saison-festif/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/06/V-LANCEMENT.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2025-09-12"
+  },
+  {
+    "date": "19/20 SEP",
+    "title": "MÉTAMORTEM : CONTRE-FUNÉRAILLES",
+    "genre": "ARTS DE RUE",
+    "link": "https://www.theatre-hexagone.eu/spectacle/metamortem-contre-funerailles/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/06/V-METAMORTEM.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2025-09-20"
+  },
+  {
+    "date": "07 OCT",
+    "title": "GASPAR CLAUS",
+    "genre": "MUSIQUE",
+    "link": "https://www.theatre-hexagone.eu/spectacle/gaspar-claus/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/06/v-gaspar.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2025-10-07"
+  },
+  {
+    "date": "09 OCT",
+    "title": "HANDLE WITH CARE",
+    "genre": "THÉÂTRE",
+    "link": "https://www.theatre-hexagone.eu/spectacle/handle-with-care/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-handle.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2025-10-09"
+  },
+  {
+    "date": "14 OCT",
+    "title": "HÉRITAGE",
+    "genre": "THÉÂTRE",
+    "link": "https://www.theatre-hexagone.eu/spectacle/heritage-spectacle/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-heritage.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2025-10-14"
+  },
+  {
+    "date": "16/17 OCT",
+    "title": "INCONSTANCE",
+    "genre": "HUMOUR",
+    "link": "https://www.theatre-hexagone.eu/spectacle/inconstance/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-inconstance.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2025-10-17"
+  },
+  {
+    "date": "04/05/06/07 NOV",
+    "title": "M.A.R",
+    "genre": "THÉÂTRE D'OBJETS",
+    "link": "https://www.theatre-hexagone.eu/spectacle/m-a-r/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-mar.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2025-11-07"
+  },
+  {
+    "date": "04/07/25/28 NOV",
+    "title": "ZONE CRITIQUE 1 & 2",
+    "genre": "THÉÂTRE",
+    "link": "https://www.theatre-hexagone.eu/spectacle/zone-critique-1-2/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/10/v-zone-critique.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2025-11-28"
+  },
+  {
+    "date": "05 NOV",
+    "title": "MÉMENTO",
+    "genre": "DANSE ÉLECTRO - HIP-HOP",
+    "link": "https://www.theatre-hexagone.eu/spectacle/memento-spectacle/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-memento.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2025-11-05"
+  },
+  {
+    "date": "19 NOV",
+    "title": "SOIRÉE MULTIPRISES #1",
+    "genre": "ARTS NUMÉRIQUES",
+    "link": "https://www.theatre-hexagone.eu/spectacle/soiree-multiprises-1/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/06/v-soiree-mltp-2.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2025-11-19"
+  },
+  {
+    "date": "20 NOV",
+    "title": "LOYA",
+    "genre": "CINÉ-CONCERT",
+    "link": "https://www.theatre-hexagone.eu/spectacle/loya-spectacle/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-loya.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2025-11-20"
+  },
+  {
+    "date": "20 NOV",
+    "title": "VINCENT MOON",
+    "genre": "CINÉ-CONCERT",
+    "link": "https://www.theatre-hexagone.eu/spectacle/vincent-moon-spectacle/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-vincent-moon.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2025-11-20"
+  },
+  {
+    "date": "25/27 NOV",
+    "title": "MORT D'UNE MONTAGNE",
+    "genre": "THÉÂTRE",
+    "link": "https://www.theatre-hexagone.eu/spectacle/mort-dune-montagne/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-mort-d-une-montagne.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2025-11-27"
+  },
+  {
+    "date": "02 DÉC",
+    "title": "WIRELESS PEOPLE",
+    "genre": "THÉÂTRE",
+    "link": "https://www.theatre-hexagone.eu/spectacle/wireless-people/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-wireless.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2025-12-02"
+  },
+  {
+    "date": "09 DÉC",
+    "title": "AARON",
+    "genre": "THÉÂTRE",
+    "link": "https://www.theatre-hexagone.eu/spectacle/aaron-swartz/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-aaron.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2025-12-09"
+  },
+  {
+    "date": "09 DÉC",
+    "title": "COMMENT TRAVERSER LES SOMBRES TEMPS ?",
+    "genre": "THÉÂTRE",
+    "link": "https://www.theatre-hexagone.eu/spectacle/comment-traverser-les-sombres-temps/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-audrey.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2025-12-09"
+  },
+  {
+    "date": "16/17/18/19 DÉC",
+    "title": "BIOGRAPHIES",
+    "genre": "JONGLAGE & RAP",
+    "link": "https://www.theatre-hexagone.eu/spectacle/biographies-spectacle/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-biographies.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2025-12-19"
+  },
+  {
+    "date": "12 JAN",
+    "title": "SOIRÉE MULTIPRISES #2",
+    "genre": "ARTS NUMÉRIQUES",
+    "link": "https://www.theatre-hexagone.eu/spectacle/soiree-multiprises-2/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/06/v-soiree-MLTP-1.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2026-01-12"
+  },
+  {
+    "date": "13 JAN",
+    "title": "ERIC RAYNAUD feat. Charles Dubois",
+    "genre": "LIVE AUDIOVISUEL",
+    "link": "https://www.theatre-hexagone.eu/spectacle/eric-raynaud/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/06/v-ode.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2026-01-13"
+  },
+  {
+    "date": "13 JAN",
+    "title": "MYRIAM BLEAU & NIEN TZU WENG",
+    "genre": "LIVE AUDIOVISUEL",
+    "link": "https://www.theatre-hexagone.eu/spectacle/myriam-bleau-nien-tzu-weng/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-myriam-bleau.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2026-01-13"
+  },
+  {
+    "date": "15/16/17 JAN",
+    "title": "PIERRE-EMMANUEL BARRÉ",
+    "genre": "HUMOUR & THÉÂTRE",
+    "link": "https://www.theatre-hexagone.eu/spectacle/pierre-emmanuel-barre/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/06/v-peb.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2026-01-17"
+  },
+  {
+    "date": "20/21/22 JAN",
+    "title": "FAUNE",
+    "genre": "CIRQUE & DANSE",
+    "link": "https://www.theatre-hexagone.eu/spectacle/faune-spectacle/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-faune.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2026-01-22"
+  },
+  {
+    "date": "27/28 JAN",
+    "title": "UNE OMBRE VORACE",
+    "genre": "THÉÂTRE",
+    "link": "https://www.theatre-hexagone.eu/spectacle/une-ombre-vorace/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-une-ombre-vorace.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2026-01-28"
+  },
+  {
+    "date": "30/31 JAN",
+    "title": "PISTE, PISTE, PISTE",
+    "genre": "CIRQUE - ARTS VISUELS - DANSE",
+    "link": "https://www.theatre-hexagone.eu/spectacle/piste-piste-piste/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-piste.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2026-01-31"
+  },
+  {
+    "date": "02 FÉV",
+    "title": "SOIRÉE MULTIPRISES #3",
+    "genre": "ARTS NUMÉRIQUES",
+    "link": "https://www.theatre-hexagone.eu/spectacle/soiree-multiprises-3/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/06/v-soiree-mltp-4.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2026-02-02"
+  },
+  {
+    "date": "03 FÉV",
+    "title": "RÉVERBÉRATIONS, ÉTUDE 8",
+    "genre": "DANSE",
+    "link": "https://www.theatre-hexagone.eu/spectacle/reverberations-etude/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-reverberations.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2026-02-03"
+  },
+  {
+    "date": "03 FÉV",
+    "title": "SCORE",
+    "genre": "DANSE",
+    "link": "https://www.theatre-hexagone.eu/spectacle/score-spectacle/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-score.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2026-02-03"
+  },
+  {
+    "date": "24/25/26 FÉV",
+    "title": "UN VOLCAN SILENCIEUX",
+    "genre": "Théâtre",
+    "link": "https://www.theatre-hexagone.eu/spectacle/un-volcan-silencieux/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-un-volcan-silencieux.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2026-02-26"
+  },
+  {
+    "date": "26 FÉV",
+    "title": "TARTA RELENA",
+    "genre": "MUSIQUE",
+    "link": "https://www.theatre-hexagone.eu/spectacle/tarta-relena-spectacle/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-tarta-relena.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2026-02-26"
+  },
+  {
+    "date": "03/04 MARS",
+    "title": "FEU LA FORÊT",
+    "genre": "THÉÂTRE",
+    "link": "https://www.theatre-hexagone.eu/spectacle/feu-la-foret-spectacle/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-feu-la-foret.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2026-03-04"
+  },
+  {
+    "date": "04 MARS",
+    "title": "SOUS LE VOLCAN",
+    "genre": "DANSE",
+    "link": "https://www.theatre-hexagone.eu/spectacle/sous-le-volcan-spectacle/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-souls-le-volcan.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2026-03-04"
+  },
+  {
+    "date": "10/11/12 MARS",
+    "title": "LA FIN DU PRÉSENT",
+    "genre": "THÉÂTRE IMMERSIF",
+    "link": "https://www.theatre-hexagone.eu/spectacle/la-fin-du-present/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-la-fin-du-present.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2026-03-12"
+  },
+  {
+    "date": "19 MARS",
+    "title": "L'ODYSSÉE TRANSANTARCTIC",
+    "genre": "Musique",
+    "link": "https://www.theatre-hexagone.eu/spectacle/lodyssee-transantarctic/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-odyssee.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2026-03-19"
+  },
+  {
+    "date": "25 MARS",
+    "title": "SOIRÉE MULTIPRISES #4",
+    "genre": "ARTS NUMÉRIQUES",
+    "link": "https://www.theatre-hexagone.eu/spectacle/soiree-multiprises-4/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/06/soiree-mlto-3.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2026-03-25"
+  },
+  {
+    "date": "26 MARS",
+    "title": "ROJIN SHARAFI",
+    "genre": "MUSIQUE ÉLECTRONIQUE",
+    "link": "https://www.theatre-hexagone.eu/spectacle/rojin-sharafi/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/06/v-rojin.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2026-03-26"
+  },
+  {
+    "date": "26 MARS",
+    "title": "RYOICHI KUROKAWA",
+    "genre": "LIVE AUDIOVISUEL",
+    "link": "https://www.theatre-hexagone.eu/spectacle/ryoichi-kurokawa/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-ryochi.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2026-03-26"
+  },
+  {
+    "date": "31 MARS",
+    "title": "JULIA",
+    "genre": "THÉÂTRE - MUSIQUE",
+    "link": "https://www.theatre-hexagone.eu/spectacle/julia-spectacle/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-julia.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2026-03-31"
+  },
+  {
+    "date": "02 AVR",
+    "title": "OCÉANS INFINIS",
+    "genre": "Musique - Conférence",
+    "link": "https://www.theatre-hexagone.eu/spectacle/oceans-infinis-spectacle/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-ocean-infini.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2026-04-02"
+  },
+  {
+    "date": "16 & 21 AVR",
+    "title": "HABITER LES NUITS",
+    "genre": "CINÉ-CONCERT",
+    "link": "https://www.theatre-hexagone.eu/spectacle/habiter-les-nuits-spectacle/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-habiter-les-nuits.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2026-04-21"
+  },
+  {
+    "date": "AVRIL/JUIN",
+    "title": "FEU LA FORÊT",
+    "genre": "THÉÂTRE EN EXTÉRIEUR",
+    "link": "https://www.theatre-hexagone.eu/spectacle/feu-la-foret-tournee/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2026/02/feu-carre.jpg",
+    "lieu": "Hexagone",
+    "dateISO": ""
+  },
+  {
+    "date": "23 AVR",
+    "title": "L'HOMME-POISSON",
+    "genre": "THÉÂTRE",
+    "link": "https://www.theatre-hexagone.eu/spectacle/lhomme-poisson/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-l-homme-poisson.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2026-04-23"
+  },
+  {
+    "date": "25 AVRIL",
+    "title": "LES HORIZONADES",
+    "genre": "MUSIQUE, DANSE, CONTE",
+    "link": "https://www.theatre-hexagone.eu/spectacle/les-horizonades/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2026/03/v-horizonades.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2026-04-25"
+  },
+  {
+    "date": "12 MAI",
+    "title": "ÉTUDIANTS ARTISTES DE HAUT NIVEAU",
+    "genre": "MUSIQUE, DANSE",
+    "link": "https://www.theatre-hexagone.eu/spectacle/etudiants-artistes-de-haut-niveau/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-scene-ouverte.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2026-05-12"
+  },
+  {
+    "date": "23/24/26 MAI",
+    "title": "FAUNE",
+    "genre": "CIRQUE & DANSE EN EXTÉRIEUR",
+    "link": "https://www.theatre-hexagone.eu/spectacle/faune-en-tournee/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-faune.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2026-05-26"
+  },
+  {
+    "date": "26 MAI",
+    "title": "PREMIÈRES SCÈNES DES ÉLÈVES DU JUMELAGE",
+    "genre": "THÉÂTRE",
+    "link": "https://www.theatre-hexagone.eu/spectacle/premieres-scenes-des-eleves-du-jumelage/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2026/03/premiere-scene.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2026-05-26"
+  },
+  {
+    "date": "28 MAI",
+    "title": "PREMIÈRES SCÈNES DES ÉLÈVES EN OPTION THÉÂTRE",
+    "genre": "THÉÂTRE",
+    "link": "https://www.theatre-hexagone.eu/spectacle/premieres-scenes-des-eleves-en-option-theatre/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2026/03/premiere-scene2.jpg",
+    "lieu": "Hexagone",
+    "dateISO": "2026-05-28"
+  },
+  {
+    "date": "JUILLET",
+    "title": "FEU LA FORÊT",
+    "genre": "THÉÂTRE AU JARDIN DU LAUTARET",
+    "link": "https://www.theatre-hexagone.eu/spectacle/feu-la-foret-2/",
+    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-feu-la-foret.jpg",
+    "lieu": "Hexagone",
+    "dateISO": ""
   },
   {
     "date": "jeu 9 Oct 2025 20h00",
@@ -2979,15 +3402,6 @@
     "dateISO": "2027-10-08"
   },
   {
-    "title": "Plaquette saison 2025 - 2026",
-    "date": "Découvrez la nouvelle saison sur le pdf",
-    "genre": "Permanences billetterie (hors vacances scolaires) : les mardis de 15h à 17h, dans le hall d'accueil de la mairie ou sur rendez-vous au 04 76 89 69 12.",
-    "link": "https://www.ville-gieres.fr/images/culture/2025/plaquette-laussy-25-26.pdf",
-    "image": "https://placehold.co/600x400/e2e8f0/94a3b8?text=Pas+d%27image",
-    "lieu": "Le Laussy",
-    "dateISO": ""
-  },
-  {
     "title": "Ma vie, son œuvre : Renaud 1975-1985",
     "date": "Vendredi 17 octobre à 20h30",
     "genre": "Chanson française",
@@ -3103,429 +3517,6 @@
     "image": "https://placehold.co/600x400/e2e8f0/94a3b8?text=Pas+d%27image",
     "lieu": "Le Laussy",
     "dateISO": "2026-03-21"
-  },
-  {
-    "date": "12 SEP",
-    "title": "LANCEMENT DE SAISON FESTIF",
-    "genre": "THÉÂTRE, DANSE, MUSIQUE",
-    "link": "https://www.theatre-hexagone.eu/spectacle/lancement-de-saison-festif/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/06/V-LANCEMENT.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2025-09-12"
-  },
-  {
-    "date": "19/20 SEP",
-    "title": "MÉTAMORTEM : CONTRE-FUNÉRAILLES",
-    "genre": "ARTS DE RUE",
-    "link": "https://www.theatre-hexagone.eu/spectacle/metamortem-contre-funerailles/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/06/V-METAMORTEM.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2025-09-20"
-  },
-  {
-    "date": "07 OCT",
-    "title": "GASPAR CLAUS",
-    "genre": "MUSIQUE",
-    "link": "https://www.theatre-hexagone.eu/spectacle/gaspar-claus/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/06/v-gaspar.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2025-10-07"
-  },
-  {
-    "date": "09 OCT",
-    "title": "HANDLE WITH CARE",
-    "genre": "THÉÂTRE",
-    "link": "https://www.theatre-hexagone.eu/spectacle/handle-with-care/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-handle.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2025-10-09"
-  },
-  {
-    "date": "14 OCT",
-    "title": "HÉRITAGE",
-    "genre": "THÉÂTRE",
-    "link": "https://www.theatre-hexagone.eu/spectacle/heritage-spectacle/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-heritage.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2025-10-14"
-  },
-  {
-    "date": "16/17 OCT",
-    "title": "INCONSTANCE",
-    "genre": "HUMOUR",
-    "link": "https://www.theatre-hexagone.eu/spectacle/inconstance/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-inconstance.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2025-10-17"
-  },
-  {
-    "date": "04/05/06/07 NOV",
-    "title": "M.A.R",
-    "genre": "THÉÂTRE D'OBJETS",
-    "link": "https://www.theatre-hexagone.eu/spectacle/m-a-r/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-mar.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2025-11-07"
-  },
-  {
-    "date": "04/07/25/28 NOV",
-    "title": "ZONE CRITIQUE 1 & 2",
-    "genre": "THÉÂTRE",
-    "link": "https://www.theatre-hexagone.eu/spectacle/zone-critique-1-2/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/10/v-zone-critique.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2025-11-28"
-  },
-  {
-    "date": "05 NOV",
-    "title": "MÉMENTO",
-    "genre": "DANSE ÉLECTRO - HIP-HOP",
-    "link": "https://www.theatre-hexagone.eu/spectacle/memento-spectacle/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-memento.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2025-11-05"
-  },
-  {
-    "date": "19 NOV",
-    "title": "SOIRÉE MULTIPRISES #1",
-    "genre": "ARTS NUMÉRIQUES",
-    "link": "https://www.theatre-hexagone.eu/spectacle/soiree-multiprises-1/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/06/v-soiree-mltp-2.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2025-11-19"
-  },
-  {
-    "date": "20 NOV",
-    "title": "LOYA",
-    "genre": "CINÉ-CONCERT",
-    "link": "https://www.theatre-hexagone.eu/spectacle/loya-spectacle/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-loya.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2025-11-20"
-  },
-  {
-    "date": "20 NOV",
-    "title": "VINCENT MOON",
-    "genre": "CINÉ-CONCERT",
-    "link": "https://www.theatre-hexagone.eu/spectacle/vincent-moon-spectacle/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-vincent-moon.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2025-11-20"
-  },
-  {
-    "date": "25/27 NOV",
-    "title": "MORT D'UNE MONTAGNE",
-    "genre": "THÉÂTRE",
-    "link": "https://www.theatre-hexagone.eu/spectacle/mort-dune-montagne/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-mort-d-une-montagne.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2025-11-27"
-  },
-  {
-    "date": "02 DÉC",
-    "title": "WIRELESS PEOPLE",
-    "genre": "THÉÂTRE",
-    "link": "https://www.theatre-hexagone.eu/spectacle/wireless-people/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-wireless.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2025-12-02"
-  },
-  {
-    "date": "09 DÉC",
-    "title": "AARON",
-    "genre": "THÉÂTRE",
-    "link": "https://www.theatre-hexagone.eu/spectacle/aaron-swartz/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-aaron.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2025-12-09"
-  },
-  {
-    "date": "09 DÉC",
-    "title": "COMMENT TRAVERSER LES SOMBRES TEMPS ?",
-    "genre": "THÉÂTRE",
-    "link": "https://www.theatre-hexagone.eu/spectacle/comment-traverser-les-sombres-temps/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-audrey.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2025-12-09"
-  },
-  {
-    "date": "16/17/18/19 DÉC",
-    "title": "BIOGRAPHIES",
-    "genre": "JONGLAGE & RAP",
-    "link": "https://www.theatre-hexagone.eu/spectacle/biographies-spectacle/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-biographies.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2025-12-19"
-  },
-  {
-    "date": "12 JAN",
-    "title": "SOIRÉE MULTIPRISES #2",
-    "genre": "ARTS NUMÉRIQUES",
-    "link": "https://www.theatre-hexagone.eu/spectacle/soiree-multiprises-2/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/06/v-soiree-MLTP-1.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2026-01-12"
-  },
-  {
-    "date": "13 JAN",
-    "title": "ERIC RAYNAUD feat. Charles Dubois",
-    "genre": "LIVE AUDIOVISUEL",
-    "link": "https://www.theatre-hexagone.eu/spectacle/eric-raynaud/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/06/v-ode.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2026-01-13"
-  },
-  {
-    "date": "13 JAN",
-    "title": "MYRIAM BLEAU & NIEN TZU WENG",
-    "genre": "LIVE AUDIOVISUEL",
-    "link": "https://www.theatre-hexagone.eu/spectacle/myriam-bleau-nien-tzu-weng/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-myriam-bleau.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2026-01-13"
-  },
-  {
-    "date": "15/16/17 JAN",
-    "title": "PIERRE-EMMANUEL BARRÉ",
-    "genre": "HUMOUR & THÉÂTRE",
-    "link": "https://www.theatre-hexagone.eu/spectacle/pierre-emmanuel-barre/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/06/v-peb.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2026-01-17"
-  },
-  {
-    "date": "20/21/22 JAN",
-    "title": "FAUNE",
-    "genre": "CIRQUE & DANSE",
-    "link": "https://www.theatre-hexagone.eu/spectacle/faune-spectacle/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-faune.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2026-01-22"
-  },
-  {
-    "date": "27/28 JAN",
-    "title": "UNE OMBRE VORACE",
-    "genre": "THÉÂTRE",
-    "link": "https://www.theatre-hexagone.eu/spectacle/une-ombre-vorace/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-une-ombre-vorace.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2026-01-28"
-  },
-  {
-    "date": "30/31 JAN",
-    "title": "PISTE, PISTE, PISTE",
-    "genre": "CIRQUE - ARTS VISUELS - DANSE",
-    "link": "https://www.theatre-hexagone.eu/spectacle/piste-piste-piste/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-piste.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2026-01-31"
-  },
-  {
-    "date": "02 FÉV",
-    "title": "SOIRÉE MULTIPRISES #3",
-    "genre": "ARTS NUMÉRIQUES",
-    "link": "https://www.theatre-hexagone.eu/spectacle/soiree-multiprises-3/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/06/v-soiree-mltp-4.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2026-02-02"
-  },
-  {
-    "date": "03 FÉV",
-    "title": "RÉVERBÉRATIONS, ÉTUDE 8",
-    "genre": "DANSE",
-    "link": "https://www.theatre-hexagone.eu/spectacle/reverberations-etude/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-reverberations.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2026-02-03"
-  },
-  {
-    "date": "03 FÉV",
-    "title": "SCORE",
-    "genre": "DANSE",
-    "link": "https://www.theatre-hexagone.eu/spectacle/score-spectacle/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-score.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2026-02-03"
-  },
-  {
-    "date": "24/25/26 FÉV",
-    "title": "UN VOLCAN SILENCIEUX",
-    "genre": "Théâtre",
-    "link": "https://www.theatre-hexagone.eu/spectacle/un-volcan-silencieux/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-un-volcan-silencieux.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2026-02-26"
-  },
-  {
-    "date": "26 FÉV",
-    "title": "TARTA RELENA",
-    "genre": "MUSIQUE",
-    "link": "https://www.theatre-hexagone.eu/spectacle/tarta-relena-spectacle/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-tarta-relena.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2026-02-26"
-  },
-  {
-    "date": "03/04 MARS",
-    "title": "FEU LA FORÊT",
-    "genre": "THÉÂTRE",
-    "link": "https://www.theatre-hexagone.eu/spectacle/feu-la-foret-spectacle/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-feu-la-foret.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2026-03-04"
-  },
-  {
-    "date": "04 MARS",
-    "title": "SOUS LE VOLCAN",
-    "genre": "DANSE",
-    "link": "https://www.theatre-hexagone.eu/spectacle/sous-le-volcan-spectacle/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-souls-le-volcan.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2026-03-04"
-  },
-  {
-    "date": "10/11/12 MARS",
-    "title": "LA FIN DU PRÉSENT",
-    "genre": "THÉÂTRE IMMERSIF",
-    "link": "https://www.theatre-hexagone.eu/spectacle/la-fin-du-present/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-la-fin-du-present.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2026-03-12"
-  },
-  {
-    "date": "19 MARS",
-    "title": "L'ODYSSÉE TRANSANTARCTIC",
-    "genre": "Musique",
-    "link": "https://www.theatre-hexagone.eu/spectacle/lodyssee-transantarctic/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-odyssee.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2026-03-19"
-  },
-  {
-    "date": "25 MARS",
-    "title": "SOIRÉE MULTIPRISES #4",
-    "genre": "ARTS NUMÉRIQUES",
-    "link": "https://www.theatre-hexagone.eu/spectacle/soiree-multiprises-4/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/06/soiree-mlto-3.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2026-03-25"
-  },
-  {
-    "date": "26 MARS",
-    "title": "ROJIN SHARAFI",
-    "genre": "MUSIQUE ÉLECTRONIQUE",
-    "link": "https://www.theatre-hexagone.eu/spectacle/rojin-sharafi/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/06/v-rojin.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2026-03-26"
-  },
-  {
-    "date": "26 MARS",
-    "title": "RYOICHI KUROKAWA",
-    "genre": "LIVE AUDIOVISUEL",
-    "link": "https://www.theatre-hexagone.eu/spectacle/ryoichi-kurokawa/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-ryochi.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2026-03-26"
-  },
-  {
-    "date": "31 MARS",
-    "title": "JULIA",
-    "genre": "THÉÂTRE - MUSIQUE",
-    "link": "https://www.theatre-hexagone.eu/spectacle/julia-spectacle/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-julia.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2026-03-31"
-  },
-  {
-    "date": "02 AVR",
-    "title": "OCÉANS INFINIS",
-    "genre": "Musique - Conférence",
-    "link": "https://www.theatre-hexagone.eu/spectacle/oceans-infinis-spectacle/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-ocean-infini.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2026-04-02"
-  },
-  {
-    "date": "16 & 21 AVR",
-    "title": "HABITER LES NUITS",
-    "genre": "CINÉ-CONCERT",
-    "link": "https://www.theatre-hexagone.eu/spectacle/habiter-les-nuits-spectacle/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-habiter-les-nuits.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2026-04-21"
-  },
-  {
-    "date": "AVRIL/JUIN",
-    "title": "FEU LA FORÊT",
-    "genre": "THÉÂTRE EN EXTÉRIEUR",
-    "link": "https://www.theatre-hexagone.eu/spectacle/feu-la-foret-tournee/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2026/02/feu-carre.jpg",
-    "lieu": "Hexagone",
-    "dateISO": ""
-  },
-  {
-    "date": "23 AVR",
-    "title": "L'HOMME-POISSON",
-    "genre": "THÉÂTRE",
-    "link": "https://www.theatre-hexagone.eu/spectacle/lhomme-poisson/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-l-homme-poisson.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2026-04-23"
-  },
-  {
-    "date": "25 AVRIL",
-    "title": "LES HORIZONADES",
-    "genre": "MUSIQUE, DANSE, CONTE",
-    "link": "https://www.theatre-hexagone.eu/spectacle/les-horizonades/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2026/03/v-horizonades.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2026-04-25"
-  },
-  {
-    "date": "12 MAI",
-    "title": "ÉTUDIANTS ARTISTES DE HAUT NIVEAU",
-    "genre": "MUSIQUE, DANSE",
-    "link": "https://www.theatre-hexagone.eu/spectacle/etudiants-artistes-de-haut-niveau/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-scene-ouverte.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2026-05-12"
-  },
-  {
-    "date": "23/24/26 MAI",
-    "title": "FAUNE",
-    "genre": "CIRQUE & DANSE EN EXTÉRIEUR",
-    "link": "https://www.theatre-hexagone.eu/spectacle/faune-en-tournee/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-faune.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2026-05-26"
-  },
-  {
-    "date": "26 MAI",
-    "title": "PREMIÈRES SCÈNES DES ÉLÈVES DU JUMELAGE",
-    "genre": "THÉÂTRE",
-    "link": "https://www.theatre-hexagone.eu/spectacle/premieres-scenes-des-eleves-du-jumelage/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2026/03/premiere-scene.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2026-05-26"
-  },
-  {
-    "date": "28 MAI",
-    "title": "PREMIÈRES SCÈNES DES ÉLÈVES EN OPTION THÉÂTRE",
-    "genre": "THÉÂTRE",
-    "link": "https://www.theatre-hexagone.eu/spectacle/premieres-scenes-des-eleves-en-option-theatre/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2026/03/premiere-scene2.jpg",
-    "lieu": "Hexagone",
-    "dateISO": "2026-05-28"
-  },
-  {
-    "date": "JUILLET",
-    "title": "FEU LA FORÊT",
-    "genre": "THÉÂTRE AU JARDIN DU LAUTARET",
-    "link": "https://www.theatre-hexagone.eu/spectacle/feu-la-foret-2/",
-    "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-feu-la-foret.jpg",
-    "lieu": "Hexagone",
-    "dateISO": ""
   },
   {
     "title": "Méli Mômes «Et pis c’est tout !»",
