@@ -10,7 +10,8 @@
       "Bash(grep -h \"lieu\" c:/Users/Alexis/Desktop/agenda-isere/src/scrapers/*.js)",
       "WebFetch(domain:www.ville-gieres.fr)",
       "WebFetch(domain:lavencescene.saint-egreve.fr)",
-      "WebFetch(domain:www.theatre-hexagone.eu)"
+      "WebFetch(domain:www.theatre-hexagone.eu)",
+      "Bash(node -e ':*)"
     ]
   }
 }

@@ -3526,5 +3526,23 @@
     "image": "https://hexagonarts.eu/hsn-2025-2026/wp-content/uploads/sites/36/2025/04/v-feu-la-foret.jpg",
     "lieu": "Hexagone",
     "dateISO": ""
+  },
+  {
+    "title": "Méli Mômes «Et pis c’est tout !»",
+    "date": "Vendredi 24 avril 2026 à 19h",
+    "genre": "Musique jeune public",
+    "link": "https://lavencescene.saint-egreve.fr/spectacles/meli-momes-et-pis-cest-tout-2372.html",
+    "image": "https://lavencescene.saint-egreve.fr/fileadmin/_processed_/3/8/csm_LA9B2869_-Yannick-Perrin-1_a7e817bede.jpg",
+    "lieu": "La Vence Scène",
+    "dateISO": "2026-04-24"
+  },
+  {
+    "title": "La Bête Noire & Petite Reine",
+    "date": "Jeudi 21 mai 2026 à 20h",
+    "genre": "Cirque",
+    "link": "https://lavencescene.saint-egreve.fr/spectacles/la-bete-noire-petite-reine-2373.html",
+    "image": "https://lavencescene.saint-egreve.fr/fileadmin/_processed_/8/d/csm___Pierre_Planchenault--140_e14559108e.jpg",
+    "lieu": "La Vence Scène",
+    "dateISO": "2026-05-21"
   }
 ]

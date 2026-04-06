@@ -337,6 +337,19 @@
       text-overflow: ellipsis;
     }
 
+    /* SÉPARATEUR MOIS */
+    .month-sep {
+      grid-column: 1 / -1;
+      padding: 0.75rem 0 0.5rem;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      border-bottom: 1px solid var(--border);
+    }
+    .month-sep.hidden { display: none; }
+
     /* VIDE */
     #empty {
       display: none;
@@ -539,6 +552,7 @@ function toggleFav(id) {
 }
 
 // --- Filtres ---
+const MOIS = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"];
 let activeMonth = null, activeLieu = null, showFavOnly = false, showPast = false;
 const TODAY = new Date().toISOString().slice(0, 10);
 
@@ -556,6 +570,21 @@ function applyFilters() {
     card.classList.toggle("hidden", !match);
     if (match) totalVisible++;
   });
+  // Cache les séparateurs de mois si aucune carte n'est visible dans ce mois
+  const children = [...document.getElementById("grid").children];
+  let i = 0;
+  while (i < children.length) {
+    if (children[i].classList.contains("month-sep")) {
+      const sep = children[i];
+      let hasVisible = false;
+      i++;
+      while (i < children.length && !children[i].classList.contains("month-sep")) {
+        if (!children[i].classList.contains("hidden")) hasVisible = true;
+        i++;
+      }
+      sep.classList.toggle("hidden", !hasVisible);
+    } else { i++; }
+  }
   document.getElementById("count").textContent = totalVisible;
   document.getElementById("empty").style.display = totalVisible === 0 ? "block" : "none";
 }
@@ -681,10 +710,31 @@ async function loadEvents() {
     });
     const grid = document.getElementById("grid");
     grid.innerHTML = "";
-    for (const e of events) grid.appendChild(makeCard(e));
+    let currentMonth = null;
+    for (const e of events) {
+      const month = e.dateISO ? e.dateISO.slice(0, 7) : null;
+      if (month && month !== currentMonth) {
+        currentMonth = month;
+        const [y, m] = month.split("-");
+        const sep = document.createElement("div");
+        sep.className = "month-sep";
+        sep.dataset.month = month;
+        sep.textContent = `${MOIS[parseInt(m) - 1]} ${y}`;
+        grid.appendChild(sep);
+      }
+      grid.appendChild(makeCard(e));
+    }
     applyFilters();
     return events;
   } catch { return []; }
+}
+
+const JOURS = ["Dimanche","Lundi","Mardi","Mercredi","Jeudi","Vendredi","Samedi"];
+function formatDate(dateISO) {
+  if (!dateISO) return "";
+  const date = new Date(dateISO + "T12:00:00");
+  const [y, m, d] = dateISO.split("-");
+  return `${JOURS[date.getDay()]} ${parseInt(d)} ${MOIS[parseInt(m) - 1]} ${y}`;
 }
 
 function makeCard(e) {
@@ -703,7 +753,7 @@ function makeCard(e) {
     </div>
     <div class="card-body">
       <a class="card-title" href="${e.link || '#'}" target="_blank">${e.title}</a>
-      ${e.date ? `<span class="card-date">${e.date}</span>` : ""}
+      ${e.dateISO ? `<span class="card-date">${formatDate(e.dateISO)}</span>` : ""}
       ${e.genre ? `<span class="card-genre">${e.genre}</span>` : ""}
       ${e.lieu ? `<span class="card-lieu">${e.lieu}</span>` : ""}
     </div>
@@ -718,7 +768,6 @@ async function init() {
 
   if (!events.length) { document.getElementById("count").textContent = "0"; return; }
 
-  const MOIS = ["Janvier","Février","Mars","Avril","Mai","Juin","Juillet","Août","Septembre","Octobre","Novembre","Décembre"];
   const monthsInData = [...new Set(events.filter(e => e.dateISO).map(e => e.dateISO.slice(0, 7)))].sort();
   const dateSelect = document.getElementById("date-select");
   dateSelect.innerHTML = '<option value="">Tous les mois</option>';
