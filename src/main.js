@@ -33,6 +33,8 @@ import { scrapeGrenoble } from "./scrapers/grenoble.js";
 import { scrapeSummum } from "./scrapers/summum.js";
 import { scrapeLaussy } from "./scrapers/laussy.js";
 import { scrapeVenceScene } from "./scrapers/venceScene.js";
+import { scrapeAtrium } from "./scrapers/atrium.js";
+import { scrapeMorgado } from "./scrapers/morgado.js";
 
 const PLACEHOLDER = "https://placehold.co/600x400/e2e8f0/94a3b8?text=Pas+d%27image";
 
@@ -42,6 +44,7 @@ const PLACEHOLDER = "https://placehold.co/600x400/e2e8f0/94a3b8?text=Pas+d%27ima
 const launchOpts = {
   headless: true,
   args: ["--no-sandbox", "--disable-setuid-sandbox", "--disable-dev-shm-usage"],
+  ignoreHTTPSErrors: true, // nécessaire pour Espace Morgado (certificat auto-signé)
 };
 
 // Liste de tous les théâtres avec leur configuration
@@ -63,6 +66,8 @@ export const THEATERS = [
   { key: "summum",        label: "Summum",                    lieu: "Summum",                    scrape: ()  => scrapeSummum() },
   { key: "laussy",        label: "Le Laussy",                 lieu: "Le Laussy",                 scrape: ()  => scrapeLaussy() },
   { key: "venceScene",    label: "La Vence Scène",            lieu: "La Vence Scène",            scrape: ()  => scrapeVenceScene() },
+  { key: "atrium",        label: "Atrium de Fontanil",         lieu: "Atrium de Fontanil",         scrape: ()  => scrapeAtrium() },
+  { key: "morgado",       label: "Espace Morgado",             lieu: "Espace Morgado",             scrape: (b) => scrapeMorgado(b),       needsBrowser: true },
 ];
 
 // Ajoute l'image placeholder et convertit la date en ISO pour chaque événement

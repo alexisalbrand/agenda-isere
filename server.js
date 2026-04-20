@@ -66,7 +66,7 @@ app.get("/api/scrape-stream/:theater", (req, res) => {
   // Lance node index.js [clé] en sous-processus
   // "all" → node index.js (scrape tout)
   // autre → node index.js grandAngle (scrape un seul)
-  const ALL_KEYS = ["grandAngle","mc2","vellein","hexagone","rampe","ilyade","ponsard","agora","diapason","theatreEnRond","heureBleue","faiencerie","manege","grenoble","summum","laussy","venceScene"];
+  const ALL_KEYS = ["grandAngle","mc2","vellein","hexagone","rampe","ilyade","ponsard","agora","diapason","theatreEnRond","heureBleue","faiencerie","manege","grenoble","summum","laussy","venceScene","atrium","morgado"];
   const args = theater === "all" ? ["index.js"] : ["index.js", theater];
   const child = spawn("node", args, { cwd: __dirname });
   const errors = [];

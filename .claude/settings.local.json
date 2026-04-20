@@ -11,7 +11,10 @@
       "WebFetch(domain:www.ville-gieres.fr)",
       "WebFetch(domain:lavencescene.saint-egreve.fr)",
       "WebFetch(domain:www.theatre-hexagone.eu)",
-      "Bash(node -e ':*)"
+      "Bash(node -e ':*)",
+      "WebFetch(domain:espacemorgado.fr)",
+      "WebFetch(domain:ville-fontanil.fr)",
+      "Bash(node -e ' *)"
     ]
   }
 }
