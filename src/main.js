@@ -35,6 +35,7 @@ import { scrapeLaussy } from "./scrapers/laussy.js";
 import { scrapeVenceScene } from "./scrapers/venceScene.js";
 import { scrapeAtrium } from "./scrapers/atrium.js";
 import { scrapeMorgado } from "./scrapers/morgado.js";
+import { scrapeTourDuPin } from "./scrapers/tourDuPin.js";
 
 const PLACEHOLDER = "https://placehold.co/600x400/e2e8f0/94a3b8?text=Pas+d%27image";
 
@@ -68,6 +69,7 @@ export const THEATERS = [
   { key: "venceScene",    label: "La Vence Scène",            lieu: "La Vence Scène",            scrape: ()  => scrapeVenceScene() },
   { key: "atrium",        label: "Atrium de Fontanil",         lieu: "Atrium de Fontanil",         scrape: ()  => scrapeAtrium() },
   { key: "morgado",       label: "Espace Morgado",             lieu: "Espace Morgado",             scrape: (b) => scrapeMorgado(b),       needsBrowser: true },
+  { key: "tourDuPin",    label: "La Tour du Pin",             lieu: "La Tour du Pin",             scrape: (b) => scrapeTourDuPin(b),     needsBrowser: true },
 ];
 
 // Ajoute l'image placeholder et convertit la date en ISO pour chaque événement
