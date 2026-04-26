@@ -36,6 +36,10 @@ import { scrapeVenceScene } from "./scrapers/venceScene.js";
 import { scrapeAtrium } from "./scrapers/atrium.js";
 import { scrapeMorgado } from "./scrapers/morgado.js";
 import { scrapeTourDuPin } from "./scrapers/tourDuPin.js";
+import { scrapeIsleAbeau } from "./scrapers/isleAbeau.js";
+import { scrapeJeanVilar } from "./scrapers/jeanVilar.js";
+import { scrapeTheatreSaintMartin } from "./scrapers/theatreSaintMartin.js";
+import { scrapePalaisSports } from "./scrapers/palaisSports.js";
 
 const PLACEHOLDER = "https://placehold.co/600x400/e2e8f0/94a3b8?text=Pas+d%27image";
 
@@ -69,7 +73,11 @@ export const THEATERS = [
   { key: "venceScene",    label: "La Vence Scène",            lieu: "La Vence Scène",            scrape: ()  => scrapeVenceScene() },
   { key: "atrium",        label: "Atrium de Fontanil",         lieu: "Atrium de Fontanil",         scrape: ()  => scrapeAtrium() },
   { key: "morgado",       label: "Espace Morgado",             lieu: "Espace Morgado",             scrape: (b) => scrapeMorgado(b),       needsBrowser: true },
-  { key: "tourDuPin",    label: "La Tour du Pin",             lieu: "La Tour du Pin",             scrape: (b) => scrapeTourDuPin(b),     needsBrowser: true },
+  { key: "tourDuPin",        label: "La Tour du Pin",                 lieu: "La Tour du Pin",                 scrape: (b) => scrapeTourDuPin(b),         needsBrowser: true },
+  { key: "isleAbeau",        label: "Le Millé - L'Isle d'Abeau",      lieu: "Le Millé - L'Isle d'Abeau",      scrape: (b) => scrapeIsleAbeau(b),         needsBrowser: true },
+  { key: "jeanVilar",        label: "Théâtre Jean-Vilar",             lieu: "Théâtre Jean-Vilar",             scrape: ()  => scrapeJeanVilar() },
+  { key: "theatreSaintMartin", label: "Théâtre Saint-Martin",         lieu: "Théâtre Saint-Martin",           scrape: ()  => scrapeTheatreSaintMartin() },
+  { key: "palaisSports",     label: "Palais des Sports de Grenoble",  lieu: "Palais des Sports de Grenoble",  scrape: ()  => scrapePalaisSports() },
 ];
 
 // Ajoute l'image placeholder et convertit la date en ISO pour chaque événement

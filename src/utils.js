@@ -27,6 +27,8 @@ export const MONTHS = {
 // Si l'année est absente, on suppose : mois ≥ août → 2025, sinon → 2026
 export function toDateISO(dateStr) {
   if (!dateStr) return "";
+  // Format ISO direct (YYYY-MM-DD) → retour immédiat
+  if (/^\d{4}-\d{2}-\d{2}$/.test(dateStr.trim())) return dateStr.trim();
   // Normalise la chaîne : minuscules, remplace séparateurs par des espaces
   const s = dateStr.toLowerCase().replace(/[.\-|]/g, " ").replace(/\s+/g, " ").trim();
 
@@ -52,8 +54,16 @@ export function toDateISO(dateStr) {
   }
 
   if (!day || !month) return "";
-  // Heuristique saison : août-décembre = année courante, janvier-juillet = année suivante
-  if (!year) year = month >= 8 ? 2025 : 2026;
+  // Heuristique glissante : essaie l'année en cours ; si la date obtenue remonte
+  // à plus de 6 mois dans le passé, on prend l'année suivante.
+  if (!year) {
+    const now = new Date();
+    year = now.getFullYear();
+    const candidate = new Date(year, month - 1, day);
+    const sixMonthsAgo = new Date(now);
+    sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
+    if (candidate < sixMonthsAgo) year++;
+  }
   return `${year}-${String(month).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
 }
 
